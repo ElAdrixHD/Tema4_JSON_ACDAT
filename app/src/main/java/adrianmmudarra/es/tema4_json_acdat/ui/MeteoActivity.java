@@ -1,13 +1,15 @@
-package adrianmmudarra.es.tema4_json_acdat;
+package adrianmmudarra.es.tema4_json_acdat.ui;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class MenuActivity extends AppCompatActivity {
+import adrianmmudarra.es.tema4_json_acdat.R;
+
+public class MeteoActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_menu);
+        setContentView(R.layout.activity_meteo);
     }
 }
