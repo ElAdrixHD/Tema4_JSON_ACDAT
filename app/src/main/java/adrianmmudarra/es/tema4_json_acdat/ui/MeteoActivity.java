@@ -35,7 +35,7 @@ public class MeteoActivity extends AppCompatActivity {
     private static final String URL_city = "http://adrianm.alumno.mobi/city.list.json";
 
 //https://stackoverflow.com/questions/3371326/java-date-from-unix-timestamp
-    private static final String URL = "http://api.openweathermap.org/data/2.5/weather?q=madrid,es&units=metric&APPID=8c8452ba700cbab5cd5c81d6cb3dd338";
+    //private static final String URL = "http://api.openweathermap.org/data/2.5/weather?id={id}&units=metric&APPID=8c8452ba700cbab5cd5c81d6cb3dd338";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +55,7 @@ public class MeteoActivity extends AppCompatActivity {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                //((Ciudad) parent.getSelectedItem()).
+                //descargarTiempoCiudad(((Ciudad) parent.getSelectedItem()).getId());
             }
 
             @Override
@@ -63,6 +63,10 @@ public class MeteoActivity extends AppCompatActivity {
                 return;
             }
         });
+    }
+
+    private void descargarTiempoCiudad(int id){
+
     }
 
     private void descargarJsonCiudades() {
