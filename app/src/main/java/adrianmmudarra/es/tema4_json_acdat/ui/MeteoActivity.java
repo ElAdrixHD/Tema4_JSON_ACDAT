@@ -5,8 +5,10 @@ import android.content.DialogInterface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -29,7 +31,6 @@ public class MeteoActivity extends AppCompatActivity {
     SearchableSpinner spinner;
     ArrayAdapter<Ciudad> adapter;
     ArrayList<Ciudad> ciudades;
-    Button btn_descargar;
 
     private static final String URL_city = "http://adrianm.alumno.mobi/city.list.json";
 
@@ -50,11 +51,16 @@ public class MeteoActivity extends AppCompatActivity {
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
-        btn_descargar = findViewById(R.id.btn_meteo_descargar);
-        btn_descargar.setOnClickListener(new View.OnClickListener() {
+        descargarJsonCiudades();
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onClick(View view) {
-                descargarJsonCiudades();
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                //((Ciudad) parent.getSelectedItem()).
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                return;
             }
         });
     }
@@ -65,10 +71,8 @@ public class MeteoActivity extends AppCompatActivity {
             @Override
             public void onStart() {
                 super.onStart();
-                // called before request is started
                 progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-                progressDialog.setMessage("Connecting . . .");
-                //progressDialog.setCancelable(false);
+                progressDialog.setMessage("Cargando datos. Espere un momento.");
                 progressDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
                     public void onCancel(DialogInterface dialog) {
                         RestClient.cancelRequests(getApplicationContext(), true);
@@ -89,7 +93,7 @@ public class MeteoActivity extends AppCompatActivity {
                         adapter.addAll(ciudades);
                     }
                 } catch (JSONException e) {
-                    Toast.makeText(MeteoActivity.this,e.getMessage(),Toast.LENGTH_SHORT);
+                    mostrarMensaje(e.getMessage());
                 }
             }
 
@@ -97,17 +101,20 @@ public class MeteoActivity extends AppCompatActivity {
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
                 super.onFailure(statusCode, headers, throwable, errorResponse);
                 progressDialog.dismiss();
-                Toast.makeText(MeteoActivity.this,throwable.getMessage(),Toast.LENGTH_SHORT);
+                mostrarMensaje(throwable.getMessage());
             }
 
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                 super.onFailure(statusCode, headers, responseString, throwable);
                 progressDialog.dismiss();
-                Toast.makeText(MeteoActivity.this,responseString,Toast.LENGTH_SHORT);
+                mostrarMensaje(responseString);
 
             }
         });
     }
 
+    private void mostrarMensaje(String mensaje){
+        Toast.makeText(MeteoActivity.this, mensaje, Toast.LENGTH_LONG);
+    }
 }
