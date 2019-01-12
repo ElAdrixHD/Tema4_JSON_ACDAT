@@ -1,6 +1,5 @@
 package adrianmmudarra.es.tema4_json_acdat.ui;
 
-import android.app.DownloadManager;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.support.v7.app.AppCompatActivity;
@@ -8,7 +7,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,8 +26,8 @@ import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 import adrianmmudarra.es.tema4_json_acdat.R;
-import adrianmmudarra.es.tema4_json_acdat.model.Ciudad;
-import adrianmmudarra.es.tema4_json_acdat.model.Tiempo;
+import adrianmmudarra.es.tema4_json_acdat.model.metereologia.Ciudad;
+import adrianmmudarra.es.tema4_json_acdat.model.metereologia.Tiempo;
 import adrianmmudarra.es.tema4_json_acdat.network.ApiService;
 import adrianmmudarra.es.tema4_json_acdat.network.RestClient;
 import adrianmmudarra.es.tema4_json_acdat.utils.Analysis;

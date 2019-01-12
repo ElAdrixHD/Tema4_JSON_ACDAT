@@ -1,9 +1,8 @@
 package adrianmmudarra.es.tema4_json_acdat.network;
 
-import adrianmmudarra.es.tema4_json_acdat.model.Tiempo;
+import adrianmmudarra.es.tema4_json_acdat.model.metereologia.Tiempo;
 import retrofit2.Call;
 import retrofit2.http.GET;
-import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface ApiService {

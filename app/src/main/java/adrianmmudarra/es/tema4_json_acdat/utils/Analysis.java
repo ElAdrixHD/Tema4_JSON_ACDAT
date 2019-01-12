@@ -6,8 +6,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import adrianmmudarra.es.tema4_json_acdat.model.Ciudad;
-import adrianmmudarra.es.tema4_json_acdat.model.Coord;
+import adrianmmudarra.es.tema4_json_acdat.model.metereologia.Ciudad;
+import adrianmmudarra.es.tema4_json_acdat.model.metereologia.Coord;
 
 public class Analysis {
     public static ArrayList<Ciudad> ciudadesAnalyze(JSONArray response) throws JSONException {

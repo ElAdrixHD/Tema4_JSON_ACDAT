@@ -1,4 +1,4 @@
-package adrianmmudarra.es.tema4_json_acdat.model;
+package adrianmmudarra.es.tema4_json_acdat.model.metereologia;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
