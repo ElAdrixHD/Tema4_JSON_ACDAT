@@ -73,7 +73,7 @@ public class MeteoActivity extends AppCompatActivity {
         txt_temperatura = findViewById(R.id.txt_meteo_tiempo);
         txt_minmax = findViewById(R.id.txt_meteo_minmax);
 
-        spinner = findViewById(R.id.spiner_ej1);
+        spinner = findViewById(R.id.spiner_origen_ej2);
         spinner.setTitle("Seleccione una ciudad");
         spinner.setPositiveButton("OK");
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item);
