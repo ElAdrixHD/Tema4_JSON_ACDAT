@@ -3,6 +3,8 @@ package adrianmmudarra.es.tema4_json_acdat.model.conversor;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
+
 public class Monedas {
 
     @SerializedName("AED")
@@ -1886,5 +1888,4 @@ public class Monedas {
     public void setZWL(String zWL) {
         this.zWL = zWL;
     }
-
 }

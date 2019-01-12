@@ -18,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-        android:id="@+id/spiner_origen_ej2"
+        android:id="@+id/spiner_monedaorigen_ej2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -32,19 +32,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="8dp"
         android:text="Moneda que desea recibir:"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spiner_origen_ej2" />
+        app:layout_constraintTop_toBottomOf="@+id/spiner_monedaorigen_ej2" />
 
     <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-        android:id="@+id/spiner_destino_ej3"
+        android:id="@+id/spiner_monedadestino_ej2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="@+id/spiner_origen_ej2"
+        app:layout_constraintEnd_toEndOf="@+id/spiner_monedaorigen_ej2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
@@ -59,7 +59,7 @@
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="@+id/ed_conversor_importe"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spiner_destino_ej3" />
+        app:layout_constraintTop_toBottomOf="@+id/spiner_monedadestino_ej2" />
 
     <EditText
         android:id="@+id/ed_conversor_importe"
@@ -70,7 +70,7 @@
         android:ems="10"
         android:inputType="numberDecimal"
         app:layout_constraintStart_toEndOf="@+id/textView5"
-        app:layout_constraintTop_toBottomOf="@+id/spiner_destino_ej3" />
+        app:layout_constraintTop_toBottomOf="@+id/spiner_monedadestino_ej2" />
 
     <Button
         android:id="@+id/btn_conversor"
@@ -101,7 +101,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="64dp"
-        android:text="TextView"
         android:textColor="@android:color/black"
         android:textSize="30sp"
         android:textStyle="bold"
@@ -113,7 +112,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:text="Tex"
         android:textColor="@android:color/black"
         android:textSize="30sp"
         android:textStyle="bold"

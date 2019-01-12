@@ -35,5 +35,11 @@ public class MenuActivity extends AppCompatActivity {
                 startActivity(new Intent(MenuActivity.this, MeteoActivity.class));
             }
         });
+        ej2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MenuActivity.this, ConversorActivity.class));
+            }
+        });
     }
 }
