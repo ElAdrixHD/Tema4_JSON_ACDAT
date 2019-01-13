@@ -3,6 +3,8 @@ package adrianmmudarra.es.tema4_json_acdat.model.conversor;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 import java.util.ArrayList;
 
 public class Monedas {
@@ -1887,5 +1889,10 @@ public class Monedas {
 
     public void setZWL(String zWL) {
         this.zWL = zWL;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this).append("aED", aED).append("aFN", aFN).append("aLL", aLL).append("aMD", aMD).append("aNG", aNG).append("aOA", aOA).append("aRS", aRS).append("aUD", aUD).append("aWG", aWG).append("aZN", aZN).append("bAM", bAM).append("bBD", bBD).append("bDT", bDT).append("bGN", bGN).append("bHD", bHD).append("bIF", bIF).append("bMD", bMD).append("bND", bND).append("bOB", bOB).append("bRL", bRL).append("bSD", bSD).append("bTC", bTC).append("bTN", bTN).append("bWP", bWP).append("bYN", bYN).append("bZD", bZD).append("cAD", cAD).append("cDF", cDF).append("cHF", cHF).append("cLF", cLF).append("cLP", cLP).append("cNH", cNH).append("cNY", cNY).append("cOP", cOP).append("cRC", cRC).append("cUC", cUC).append("cUP", cUP).append("cVE", cVE).append("cZK", cZK).append("dJF", dJF).append("dKK", dKK).append("dOP", dOP).append("dZD", dZD).append("eGP", eGP).append("eRN", eRN).append("eTB", eTB).append("eUR", eUR).append("fJD", fJD).append("fKP", fKP).append("gBP", gBP).append("gEL", gEL).append("gGP", gGP).append("gHS", gHS).append("gIP", gIP).append("gMD", gMD).append("gNF", gNF).append("gTQ", gTQ).append("gYD", gYD).append("hKD", hKD).append("hNL", hNL).append("hRK", hRK).append("hTG", hTG).append("hUF", hUF).append("iDR", iDR).append("iLS", iLS).append("iMP", iMP).append("iNR", iNR).append("iQD", iQD).append("iRR", iRR).append("iSK", iSK).append("jEP", jEP).append("jMD", jMD).append("jOD", jOD).append("jPY", jPY).append("kES", kES).append("kGS", kGS).append("kHR", kHR).append("kMF", kMF).append("kPW", kPW).append("kRW", kRW).append("kWD", kWD).append("kYD", kYD).append("kZT", kZT).append("lAK", lAK).append("lBP", lBP).append("lKR", lKR).append("lRD", lRD).append("lSL", lSL).append("lYD", lYD).append("mAD", mAD).append("mDL", mDL).append("mGA", mGA).append("mKD", mKD).append("mMK", mMK).append("mNT", mNT).append("mOP", mOP).append("mRO", mRO).append("mRU", mRU).append("mUR", mUR).append("mVR", mVR).append("mWK", mWK).append("mXN", mXN).append("mYR", mYR).append("mZN", mZN).append("nAD", nAD).append("nGN", nGN).append("nIO", nIO).append("nOK", nOK).append("nPR", nPR).append("nZD", nZD).append("oMR", oMR).append("pAB", pAB).append("pEN", pEN).append("pGK", pGK).append("pHP", pHP).append("pKR", pKR).append("pLN", pLN).append("pYG", pYG).append("qAR", qAR).append("rON", rON).append("rSD", rSD).append("rUB", rUB).append("rWF", rWF).append("sAR", sAR).append("sBD", sBD).append("sCR", sCR).append("sDG", sDG).append("sEK", sEK).append("sGD", sGD).append("sHP", sHP).append("sLL", sLL).append("sOS", sOS).append("sRD", sRD).append("sSP", sSP).append("sTD", sTD).append("sTN", sTN).append("sVC", sVC).append("sYP", sYP).append("sZL", sZL).append("tHB", tHB).append("tJS", tJS).append("tMT", tMT).append("tND", tND).append("tOP", tOP).append("tRY", tRY).append("tTD", tTD).append("tWD", tWD).append("tZS", tZS).append("uAH", uAH).append("uGX", uGX).append("uSD", uSD).append("uYU", uYU).append("uZS", uZS).append("vEF", vEF).append("vES", vES).append("vND", vND).append("vUV", vUV).append("wST", wST).append("xAF", xAF).append("xAG", xAG).append("xAU", xAU).append("xCD", xCD).append("xDR", xDR).append("xOF", xOF).append("xPD", xPD).append("xPF", xPF).append("xPT", xPT).append("yER", yER).append("zAR", zAR).append("zMW", zMW).append("zWL", zWL).toString();
     }
 }

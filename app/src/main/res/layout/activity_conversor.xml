@@ -119,4 +119,18 @@
         app:layout_constraintStart_toEndOf="@+id/tv_conversor_importe"
         app:layout_constraintTop_toTopOf="@+id/tv_conversor_importe" />
 
+    <TextView
+        android:id="@+id/tv_errores"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="TextView"
+        android:textSize="6sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView7" />
+
 </android.support.constraint.ConstraintLayout>
