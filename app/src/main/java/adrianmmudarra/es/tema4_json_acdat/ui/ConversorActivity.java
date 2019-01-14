@@ -33,7 +33,7 @@ public class ConversorActivity extends AppCompatActivity {
     SearchableSpinner spinnerOrigen, spinnerDestino;
     EditText ed_importe;
     Button btn_convertir;
-    TextView tv_importe, tv_moneda, tv_errores;
+    TextView tv_importe, tv_moneda;
     ApiService apiService;
 
     ArrayAdapter<String> adapter;
@@ -54,7 +54,6 @@ public class ConversorActivity extends AppCompatActivity {
         ed_importe = findViewById(R.id.ed_conversor_importe);
         btn_convertir = findViewById(R.id.btn_conversor);
         tv_importe = findViewById(R.id.tv_conversor_importe);
-        tv_errores = findViewById(R.id.tv_errores);
         tv_moneda = findViewById(R.id.tv_conversor_simbolo);
         spinnerOrigen = findViewById(R.id.spiner_monedaorigen_ej2);
         spinnerDestino = findViewById(R.id.spiner_monedadestino_ej2);
@@ -98,7 +97,7 @@ public class ConversorActivity extends AppCompatActivity {
             result = (importe / diccionarioConversiones.get(claveOrigen)) * diccionarioConversiones.get(claveDestino);
         }
         BigDecimal bd = new BigDecimal(result);
-        bd = bd.setScale(4,BigDecimal.ROUND_HALF_UP);
+        bd = bd.setScale(2,BigDecimal.ROUND_UP);
         tv_importe.setText(Double.toString(bd.doubleValue()));
         tv_moneda.setText(claveDestino);
     }
