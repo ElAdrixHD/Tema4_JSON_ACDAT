@@ -10,8 +10,6 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
 
@@ -23,22 +21,18 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.concurrent.TimeUnit;
 
 import adrianmmudarra.es.tema4_json_acdat.R;
-import adrianmmudarra.es.tema4_json_acdat.adapter.ApiAdapter;
+import adrianmmudarra.es.tema4_json_acdat.adapter.ApiAdapterTiempo;
 import adrianmmudarra.es.tema4_json_acdat.model.metereologia.Ciudad;
 import adrianmmudarra.es.tema4_json_acdat.model.metereologia.Tiempo;
 import adrianmmudarra.es.tema4_json_acdat.network.ApiService;
 import adrianmmudarra.es.tema4_json_acdat.network.RestClient;
 import adrianmmudarra.es.tema4_json_acdat.utils.Analysis;
 import cz.msebera.android.httpclient.Header;
-import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MeteoActivity extends AppCompatActivity {
 
@@ -79,7 +73,7 @@ public class MeteoActivity extends AppCompatActivity {
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
-        apiService = ApiAdapter.getInstanceTiempo();
+        apiService = ApiAdapterTiempo.getInstance();
 
         descargarJsonCiudades();
 

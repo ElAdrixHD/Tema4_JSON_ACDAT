@@ -10,15 +10,13 @@ import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class ApiAdapter {
+public class ApiAdapterTiempo {
     private static ApiService API_SERVICE;
 
     public static final String URL_TIEMPO = "https://api.openweathermap.org/";
-    private static final String URL_MONEDA = "https://openexchangerates.org/";
 
-    public static synchronized ApiService getInstanceTiempo() {
+    public static synchronized ApiService getInstance() {
 
-        API_SERVICE = null;
         if (API_SERVICE == null) {
             OkHttpClient okHttpClient = new OkHttpClient.Builder()
                     .connectTimeout(10, TimeUnit.SECONDS)
@@ -32,30 +30,6 @@ public class ApiAdapter {
 
             Retrofit retrofit = new Retrofit.Builder()
                     .baseUrl(URL_TIEMPO)
-                    .addConverterFactory(GsonConverterFactory.create(gson))
-                    .client(okHttpClient)
-                    .build();
-
-            API_SERVICE = retrofit.create(ApiService.class);
-        }
-        return  API_SERVICE;
-    }
-
-    public static synchronized ApiService getInstanceMoneda() {
-        API_SERVICE = null;
-        if (API_SERVICE == null) {
-            OkHttpClient okHttpClient = new OkHttpClient.Builder()
-                    .connectTimeout(10, TimeUnit.SECONDS)
-                    .readTimeout(10, TimeUnit.SECONDS)
-                    .writeTimeout(5, TimeUnit.SECONDS)
-                    .build();
-
-            Gson gson = new GsonBuilder()
-                    .setDateFormat("dd-MM-yyyy")
-                    .create();
-
-            Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl(URL_MONEDA)
                     .addConverterFactory(GsonConverterFactory.create(gson))
                     .client(okHttpClient)
                     .build();

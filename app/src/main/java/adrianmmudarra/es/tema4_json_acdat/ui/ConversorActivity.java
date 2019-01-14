@@ -11,13 +11,15 @@ import android.widget.Toast;
 
 import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
 import adrianmmudarra.es.tema4_json_acdat.R;
-import adrianmmudarra.es.tema4_json_acdat.adapter.ApiAdapter;
+import adrianmmudarra.es.tema4_json_acdat.adapter.ApiAdapterMoneda;
+import adrianmmudarra.es.tema4_json_acdat.adapter.ApiAdapterTiempo;
 import adrianmmudarra.es.tema4_json_acdat.model.conversor.Conversor;
 import adrianmmudarra.es.tema4_json_acdat.model.conversor.Monedas;
 import adrianmmudarra.es.tema4_json_acdat.network.ApiService;
@@ -59,6 +61,8 @@ public class ConversorActivity extends AppCompatActivity {
 
         arraymonedas = new ArrayList<>();
 
+        apiService = ApiAdapterMoneda.getInstance();
+
         spinnerOrigen.setTitle("Moneda que desea entregar");
         spinnerOrigen.setPositiveButton("OK");
         spinnerDestino.setTitle("Moneda que desea recibir");
@@ -69,6 +73,7 @@ public class ConversorActivity extends AppCompatActivity {
         spinnerDestino.setAdapter(adapter);
 
         descargarMonedas();
+        descargarConversion();
 
         btn_convertir.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,25 +84,26 @@ public class ConversorActivity extends AppCompatActivity {
     }
 
     private void hacerConversion() {
-        Double importe = Double.parseDouble(ed_importe.getText().toString());
-        Double result;
-        if(ed_importe.getText().toString() == ""){
+        if(ed_importe.getText().toString().isEmpty()){
             mostrarMensaje("Introduce un valor válido");
             return;
         }
-        descargarConversion();
+        Double importe = Double.parseDouble(ed_importe.getText().toString());
+        Double result;
         String claveOrigen = getClave(spinnerOrigen.getSelectedItem().toString());
         String claveDestino = getClave(spinnerDestino.getSelectedItem().toString());
         if(claveOrigen == "USD"){
             result = diccionarioConversiones.get(claveDestino) * importe;
         }else {
-            result = (diccionarioConversiones.get(claveOrigen) / importe) * diccionarioConversiones.get(claveDestino);
+            result = (importe / diccionarioConversiones.get(claveOrigen)) * diccionarioConversiones.get(claveDestino);
         }
-        tv_importe.setText(result.toString());
+        BigDecimal bd = new BigDecimal(result);
+        bd = bd.setScale(4,BigDecimal.ROUND_HALF_UP);
+        tv_importe.setText(Double.toString(bd.doubleValue()));
+        tv_moneda.setText(claveDestino);
     }
 
     private void descargarConversion() {
-        apiService = ApiAdapter.getInstanceMoneda();
         Call<Conversor> call = apiService.getConversion(APPID);
         call.enqueue(new Callback<Conversor>() {
             @Override
@@ -131,7 +137,6 @@ public class ConversorActivity extends AppCompatActivity {
     }
 
     private void descargarMonedas() {
-        apiService = ApiAdapter.getInstanceMoneda();
         Call<Monedas> call = apiService.getMonedas(APPID);
         call.enqueue(new Callback<Monedas>() {
             @Override
