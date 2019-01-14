@@ -3,6 +3,8 @@ package adrianmmudarra.es.tema4_json_acdat.model.conversor;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 public class Rates {
 
     @SerializedName("AED")
@@ -40,7 +42,7 @@ public class Rates {
     private Double bAM;
     @SerializedName("BBD")
     @Expose
-    private Integer bBD;
+    private Double bBD;
     @SerializedName("BDT")
     @Expose
     private Double bDT;
@@ -52,10 +54,10 @@ public class Rates {
     private Double bHD;
     @SerializedName("BIF")
     @Expose
-    private Integer bIF;
+    private Double bIF;
     @SerializedName("BMD")
     @Expose
-    private Integer bMD;
+    private Double bMD;
     @SerializedName("BND")
     @Expose
     private Double bND;
@@ -67,7 +69,7 @@ public class Rates {
     private Double bRL;
     @SerializedName("BSD")
     @Expose
-    private Integer bSD;
+    private Double bSD;
     @SerializedName("BTC")
     @Expose
     private Double bTC;
@@ -88,7 +90,7 @@ public class Rates {
     private Double cAD;
     @SerializedName("CDF")
     @Expose
-    private Integer cDF;
+    private Double cDF;
     @SerializedName("CHF")
     @Expose
     private Double cHF;
@@ -112,7 +114,7 @@ public class Rates {
     private Double cRC;
     @SerializedName("CUC")
     @Expose
-    private Integer cUC;
+    private Double cUC;
     @SerializedName("CUP")
     @Expose
     private Double cUP;
@@ -124,7 +126,7 @@ public class Rates {
     private Double cZK;
     @SerializedName("DJF")
     @Expose
-    private Integer dJF;
+    private Double dJF;
     @SerializedName("DKK")
     @Expose
     private Double dKK;
@@ -172,7 +174,7 @@ public class Rates {
     private Double gMD;
     @SerializedName("GNF")
     @Expose
-    private Integer gNF;
+    private Double gNF;
     @SerializedName("GTQ")
     @Expose
     private Double gTQ;
@@ -208,7 +210,7 @@ public class Rates {
     private Double iNR;
     @SerializedName("IQD")
     @Expose
-    private Integer iQD;
+    private Double iQD;
     @SerializedName("IRR")
     @Expose
     private Double iRR;
@@ -235,13 +237,13 @@ public class Rates {
     private Double kGS;
     @SerializedName("KHR")
     @Expose
-    private Integer kHR;
+    private Double kHR;
     @SerializedName("KMF")
     @Expose
     private Double kMF;
     @SerializedName("KPW")
     @Expose
-    private Integer kPW;
+    private Double kPW;
     @SerializedName("KRW")
     @Expose
     private Double kRW;
@@ -256,7 +258,7 @@ public class Rates {
     private Double kZT;
     @SerializedName("LAK")
     @Expose
-    private Integer lAK;
+    private Double lAK;
     @SerializedName("LBP")
     @Expose
     private Double lBP;
@@ -295,7 +297,7 @@ public class Rates {
     private Double mOP;
     @SerializedName("MRO")
     @Expose
-    private Integer mRO;
+    private Double mRO;
     @SerializedName("MRU")
     @Expose
     private Double mRU;
@@ -322,7 +324,7 @@ public class Rates {
     private Double nAD;
     @SerializedName("NGN")
     @Expose
-    private Integer nGN;
+    private Double nGN;
     @SerializedName("NIO")
     @Expose
     private Double nIO;
@@ -340,7 +342,7 @@ public class Rates {
     private Double oMR;
     @SerializedName("PAB")
     @Expose
-    private Integer pAB;
+    private Double pAB;
     @SerializedName("PEN")
     @Expose
     private Double pEN;
@@ -397,10 +399,10 @@ public class Rates {
     private Double sHP;
     @SerializedName("SLL")
     @Expose
-    private Integer sLL;
+    private Double sLL;
     @SerializedName("SOS")
     @Expose
-    private Integer sOS;
+    private Double sOS;
     @SerializedName("SRD")
     @Expose
     private Double sRD;
@@ -457,13 +459,13 @@ public class Rates {
     private Double uGX;
     @SerializedName("USD")
     @Expose
-    private Integer uSD;
+    private Double uSD;
     @SerializedName("UYU")
     @Expose
     private Double uYU;
     @SerializedName("UZS")
     @Expose
-    private Integer uZS;
+    private Double uZS;
     @SerializedName("VEF")
     @Expose
     private Double vEF;
@@ -607,11 +609,11 @@ public class Rates {
         this.bAM = bAM;
     }
 
-    public Integer getBBD() {
+    public Double getBBD() {
         return bBD;
     }
 
-    public void setBBD(Integer bBD) {
+    public void setBBD(Double bBD) {
         this.bBD = bBD;
     }
 
@@ -639,19 +641,19 @@ public class Rates {
         this.bHD = bHD;
     }
 
-    public Integer getBIF() {
+    public Double getBIF() {
         return bIF;
     }
 
-    public void setBIF(Integer bIF) {
+    public void setBIF(Double bIF) {
         this.bIF = bIF;
     }
 
-    public Integer getBMD() {
+    public Double getBMD() {
         return bMD;
     }
 
-    public void setBMD(Integer bMD) {
+    public void setBMD(Double bMD) {
         this.bMD = bMD;
     }
 
@@ -679,11 +681,11 @@ public class Rates {
         this.bRL = bRL;
     }
 
-    public Integer getBSD() {
+    public Double getBSD() {
         return bSD;
     }
 
-    public void setBSD(Integer bSD) {
+    public void setBSD(Double bSD) {
         this.bSD = bSD;
     }
 
@@ -735,11 +737,11 @@ public class Rates {
         this.cAD = cAD;
     }
 
-    public Integer getCDF() {
+    public Double getCDF() {
         return cDF;
     }
 
-    public void setCDF(Integer cDF) {
+    public void setCDF(Double cDF) {
         this.cDF = cDF;
     }
 
@@ -799,11 +801,11 @@ public class Rates {
         this.cRC = cRC;
     }
 
-    public Integer getCUC() {
+    public Double getCUC() {
         return cUC;
     }
 
-    public void setCUC(Integer cUC) {
+    public void setCUC(Double cUC) {
         this.cUC = cUC;
     }
 
@@ -831,11 +833,11 @@ public class Rates {
         this.cZK = cZK;
     }
 
-    public Integer getDJF() {
+    public Double getDJF() {
         return dJF;
     }
 
-    public void setDJF(Integer dJF) {
+    public void setDJF(Double dJF) {
         this.dJF = dJF;
     }
 
@@ -959,11 +961,11 @@ public class Rates {
         this.gMD = gMD;
     }
 
-    public Integer getGNF() {
+    public Double getGNF() {
         return gNF;
     }
 
-    public void setGNF(Integer gNF) {
+    public void setGNF(Double gNF) {
         this.gNF = gNF;
     }
 
@@ -1055,11 +1057,11 @@ public class Rates {
         this.iNR = iNR;
     }
 
-    public Integer getIQD() {
+    public Double getIQD() {
         return iQD;
     }
 
-    public void setIQD(Integer iQD) {
+    public void setIQD(Double iQD) {
         this.iQD = iQD;
     }
 
@@ -1127,11 +1129,11 @@ public class Rates {
         this.kGS = kGS;
     }
 
-    public Integer getKHR() {
+    public Double getKHR() {
         return kHR;
     }
 
-    public void setKHR(Integer kHR) {
+    public void setKHR(Double kHR) {
         this.kHR = kHR;
     }
 
@@ -1143,11 +1145,11 @@ public class Rates {
         this.kMF = kMF;
     }
 
-    public Integer getKPW() {
+    public Double getKPW() {
         return kPW;
     }
 
-    public void setKPW(Integer kPW) {
+    public void setKPW(Double kPW) {
         this.kPW = kPW;
     }
 
@@ -1183,11 +1185,11 @@ public class Rates {
         this.kZT = kZT;
     }
 
-    public Integer getLAK() {
+    public Double getLAK() {
         return lAK;
     }
 
-    public void setLAK(Integer lAK) {
+    public void setLAK(Double lAK) {
         this.lAK = lAK;
     }
 
@@ -1287,11 +1289,11 @@ public class Rates {
         this.mOP = mOP;
     }
 
-    public Integer getMRO() {
+    public Double getMRO() {
         return mRO;
     }
 
-    public void setMRO(Integer mRO) {
+    public void setMRO(Double mRO) {
         this.mRO = mRO;
     }
 
@@ -1359,11 +1361,11 @@ public class Rates {
         this.nAD = nAD;
     }
 
-    public Integer getNGN() {
+    public Double getNGN() {
         return nGN;
     }
 
-    public void setNGN(Integer nGN) {
+    public void setNGN(Double nGN) {
         this.nGN = nGN;
     }
 
@@ -1407,11 +1409,11 @@ public class Rates {
         this.oMR = oMR;
     }
 
-    public Integer getPAB() {
+    public Double getPAB() {
         return pAB;
     }
 
-    public void setPAB(Integer pAB) {
+    public void setPAB(Double pAB) {
         this.pAB = pAB;
     }
 
@@ -1559,19 +1561,19 @@ public class Rates {
         this.sHP = sHP;
     }
 
-    public Integer getSLL() {
+    public Double getSLL() {
         return sLL;
     }
 
-    public void setSLL(Integer sLL) {
+    public void setSLL(Double sLL) {
         this.sLL = sLL;
     }
 
-    public Integer getSOS() {
+    public Double getSOS() {
         return sOS;
     }
 
-    public void setSOS(Integer sOS) {
+    public void setSOS(Double sOS) {
         this.sOS = sOS;
     }
 
@@ -1719,11 +1721,11 @@ public class Rates {
         this.uGX = uGX;
     }
 
-    public Integer getUSD() {
+    public Double getUSD() {
         return uSD;
     }
 
-    public void setUSD(Integer uSD) {
+    public void setUSD(Double uSD) {
         this.uSD = uSD;
     }
 
@@ -1735,11 +1737,11 @@ public class Rates {
         this.uYU = uYU;
     }
 
-    public Integer getUZS() {
+    public Double getUZS() {
         return uZS;
     }
 
-    public void setUZS(Integer uZS) {
+    public void setUZS(Double uZS) {
         this.uZS = uZS;
     }
 
@@ -1887,4 +1889,8 @@ public class Rates {
         this.zWL = zWL;
     }
 
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this).append("aED", aED).append("aFN", aFN).append("aLL", aLL).append("aMD", aMD).append("aNG", aNG).append("aOA", aOA).append("aRS", aRS).append("aUD", aUD).append("aWG", aWG).append("aZN", aZN).append("bAM", bAM).append("bBD", bBD).append("bDT", bDT).append("bGN", bGN).append("bHD", bHD).append("bIF", bIF).append("bMD", bMD).append("bND", bND).append("bOB", bOB).append("bRL", bRL).append("bSD", bSD).append("bTC", bTC).append("bTN", bTN).append("bWP", bWP).append("bYN", bYN).append("bZD", bZD).append("cAD", cAD).append("cDF", cDF).append("cHF", cHF).append("cLF", cLF).append("cLP", cLP).append("cNH", cNH).append("cNY", cNY).append("cOP", cOP).append("cRC", cRC).append("cUC", cUC).append("cUP", cUP).append("cVE", cVE).append("cZK", cZK).append("dJF", dJF).append("dKK", dKK).append("dOP", dOP).append("dZD", dZD).append("eGP", eGP).append("eRN", eRN).append("eTB", eTB).append("eUR", eUR).append("fJD", fJD).append("fKP", fKP).append("gBP", gBP).append("gEL", gEL).append("gGP", gGP).append("gHS", gHS).append("gIP", gIP).append("gMD", gMD).append("gNF", gNF).append("gTQ", gTQ).append("gYD", gYD).append("hKD", hKD).append("hNL", hNL).append("hRK", hRK).append("hTG", hTG).append("hUF", hUF).append("iDR", iDR).append("iLS", iLS).append("iMP", iMP).append("iNR", iNR).append("iQD", iQD).append("iRR", iRR).append("iSK", iSK).append("jEP", jEP).append("jMD", jMD).append("jOD", jOD).append("jPY", jPY).append("kES", kES).append("kGS", kGS).append("kHR", kHR).append("kMF", kMF).append("kPW", kPW).append("kRW", kRW).append("kWD", kWD).append("kYD", kYD).append("kZT", kZT).append("lAK", lAK).append("lBP", lBP).append("lKR", lKR).append("lRD", lRD).append("lSL", lSL).append("lYD", lYD).append("mAD", mAD).append("mDL", mDL).append("mGA", mGA).append("mKD", mKD).append("mMK", mMK).append("mNT", mNT).append("mOP", mOP).append("mRO", mRO).append("mRU", mRU).append("mUR", mUR).append("mVR", mVR).append("mWK", mWK).append("mXN", mXN).append("mYR", mYR).append("mZN", mZN).append("nAD", nAD).append("nGN", nGN).append("nIO", nIO).append("nOK", nOK).append("nPR", nPR).append("nZD", nZD).append("oMR", oMR).append("pAB", pAB).append("pEN", pEN).append("pGK", pGK).append("pHP", pHP).append("pKR", pKR).append("pLN", pLN).append("pYG", pYG).append("qAR", qAR).append("rON", rON).append("rSD", rSD).append("rUB", rUB).append("rWF", rWF).append("sAR", sAR).append("sBD", sBD).append("sCR", sCR).append("sDG", sDG).append("sEK", sEK).append("sGD", sGD).append("sHP", sHP).append("sLL", sLL).append("sOS", sOS).append("sRD", sRD).append("sSP", sSP).append("sTD", sTD).append("sTN", sTN).append("sVC", sVC).append("sYP", sYP).append("sZL", sZL).append("tHB", tHB).append("tJS", tJS).append("tMT", tMT).append("tND", tND).append("tOP", tOP).append("tRY", tRY).append("tTD", tTD).append("tWD", tWD).append("tZS", tZS).append("uAH", uAH).append("uGX", uGX).append("uSD", uSD).append("uYU", uYU).append("uZS", uZS).append("vEF", vEF).append("vES", vES).append("vND", vND).append("vUV", vUV).append("wST", wST).append("xAF", xAF).append("xAG", xAG).append("xAU", xAU).append("xCD", xCD).append("xDR", xDR).append("xOF", xOF).append("xPD", xPD).append("xPF", xPF).append("xPT", xPT).append("yER", yER).append("zAR", zAR).append("zMW", zMW).append("zWL", zWL).toString();
+    }
 }

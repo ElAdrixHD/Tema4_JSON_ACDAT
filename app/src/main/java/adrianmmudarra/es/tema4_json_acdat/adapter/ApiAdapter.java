@@ -18,6 +18,7 @@ public class ApiAdapter {
 
     public static synchronized ApiService getInstanceTiempo() {
 
+        API_SERVICE = null;
         if (API_SERVICE == null) {
             OkHttpClient okHttpClient = new OkHttpClient.Builder()
                     .connectTimeout(10, TimeUnit.SECONDS)
@@ -41,7 +42,7 @@ public class ApiAdapter {
     }
 
     public static synchronized ApiService getInstanceMoneda() {
-
+        API_SERVICE = null;
         if (API_SERVICE == null) {
             OkHttpClient okHttpClient = new OkHttpClient.Builder()
                     .connectTimeout(10, TimeUnit.SECONDS)

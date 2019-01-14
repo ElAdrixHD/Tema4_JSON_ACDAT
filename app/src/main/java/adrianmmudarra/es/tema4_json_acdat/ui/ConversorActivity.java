@@ -2,31 +2,28 @@ package adrianmmudarra.es.tema4_json_acdat.ui;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
+import java.util.Objects;
 
 import adrianmmudarra.es.tema4_json_acdat.R;
 import adrianmmudarra.es.tema4_json_acdat.adapter.ApiAdapter;
+import adrianmmudarra.es.tema4_json_acdat.model.conversor.Conversor;
 import adrianmmudarra.es.tema4_json_acdat.model.conversor.Monedas;
 import adrianmmudarra.es.tema4_json_acdat.network.ApiService;
-import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ConversorActivity extends AppCompatActivity {
     //https://openexchangerates.org/api/latest.json?app_id=5e13a5472b5142da85712a7480fdfa4c
@@ -39,7 +36,8 @@ public class ConversorActivity extends AppCompatActivity {
 
     ArrayAdapter<String> adapter;
     ArrayList<String> arraymonedas;
-    Map<String, String> diccionario;
+    Map<String, String> diccionarioMonedas;
+    Map<String, Double> diccionarioConversiones;
 
     private static final String APPID = "5e13a5472b5142da85712a7480fdfa4c";
 
@@ -70,23 +68,81 @@ public class ConversorActivity extends AppCompatActivity {
         spinnerOrigen.setAdapter(adapter);
         spinnerDestino.setAdapter(adapter);
 
-        apiService = ApiAdapter.getInstanceMoneda();
-
         descargarMonedas();
+
+        btn_convertir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                hacerConversion();
+            }
+        });
+    }
+
+    private void hacerConversion() {
+        Double importe = Double.parseDouble(ed_importe.getText().toString());
+        Double result;
+        if(ed_importe.getText().toString() == ""){
+            mostrarMensaje("Introduce un valor válido");
+            return;
+        }
+        descargarConversion();
+        String claveOrigen = getClave(spinnerOrigen.getSelectedItem().toString());
+        String claveDestino = getClave(spinnerDestino.getSelectedItem().toString());
+        if(claveOrigen == "USD"){
+            result = diccionarioConversiones.get(claveDestino) * importe;
+        }else {
+            result = (diccionarioConversiones.get(claveOrigen) / importe) * diccionarioConversiones.get(claveDestino);
+        }
+        tv_importe.setText(result.toString());
+    }
+
+    private void descargarConversion() {
+        apiService = ApiAdapter.getInstanceMoneda();
+        Call<Conversor> call = apiService.getConversion(APPID);
+        call.enqueue(new Callback<Conversor>() {
+            @Override
+            public void onResponse(Call<Conversor> call, Response<Conversor> response) {
+                String rates = response.body().getRates().toString();
+                String stringrates = rates.substring(rates.indexOf("[")+1,rates.indexOf("]"));
+                diccionarioConversiones = new HashMap<>();
+                String[] pairs = stringrates.split(",");
+                for (String pair : pairs) {
+                    String[] keyValue = pair.split("=");
+                    diccionarioConversiones.put(keyValue[0].toUpperCase(),Double.parseDouble(keyValue[1]));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Conversor> call, Throwable t) {
+                if (t != null)
+                    mostrarMensaje("Fallo en la comunicación:\n" + t.getMessage());
+            }
+        });
+    }
+
+    private String getClave(String s) {
+        String result = null;
+        for(Map.Entry<String, String> d : diccionarioMonedas.entrySet()){
+            if (Objects.equals(s, d.getValue())) {
+                result = d.getKey();
+            }
+        }
+        return result;
     }
 
     private void descargarMonedas() {
+        apiService = ApiAdapter.getInstanceMoneda();
         Call<Monedas> call = apiService.getMonedas(APPID);
         call.enqueue(new Callback<Monedas>() {
             @Override
             public void onResponse(Call<Monedas> call, Response<Monedas> response) {
                 String monedas = response.body().toString();
                 String stringMonedas = monedas.substring(monedas.indexOf("[")+1,monedas.indexOf("]"));
-                diccionario = new HashMap<>();
+                diccionarioMonedas = new HashMap<>();
                 String[] pairs = stringMonedas.split(",");
                 for (String pair : pairs) {
                     String[] keyValue = pair.split("=");
-                    diccionario.put(keyValue[0],keyValue[1]);
+                    diccionarioMonedas.put(keyValue[0].toUpperCase(),keyValue[1]);
                     arraymonedas.add(keyValue[1]);
                 }
                 adapter.clear();
