@@ -18,6 +18,7 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import adrianmmudarra.es.tema4_json_acdat.R;
+import adrianmmudarra.es.tema4_json_acdat.adapter.ApiAdapter;
 import adrianmmudarra.es.tema4_json_acdat.model.conversor.Monedas;
 import adrianmmudarra.es.tema4_json_acdat.network.ApiService;
 import okhttp3.OkHttpClient;
@@ -40,7 +41,6 @@ public class ConversorActivity extends AppCompatActivity {
     ArrayList<String> arraymonedas;
     Map<String, String> diccionario;
 
-    private static final String URL_MONEDA = "https://openexchangerates.org/";
     private static final String APPID = "5e13a5472b5142da85712a7480fdfa4c";
 
     @Override
@@ -70,23 +70,7 @@ public class ConversorActivity extends AppCompatActivity {
         spinnerOrigen.setAdapter(adapter);
         spinnerDestino.setAdapter(adapter);
 
-        OkHttpClient okHttpClient = new OkHttpClient.Builder()
-                .connectTimeout(10, TimeUnit.SECONDS)
-                .readTimeout(10, TimeUnit.SECONDS)
-                .writeTimeout(5, TimeUnit.SECONDS)
-                .build();
-
-        Gson gson = new GsonBuilder()
-                .setDateFormat("dd-MM-yyyy")
-                .create();
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(URL_MONEDA)
-                .addConverterFactory(GsonConverterFactory.create(gson))
-                .client(okHttpClient)
-                .build();
-
-        apiService = retrofit.create(ApiService.class);
+        apiService = ApiAdapter.getInstanceMoneda();
 
         descargarMonedas();
     }

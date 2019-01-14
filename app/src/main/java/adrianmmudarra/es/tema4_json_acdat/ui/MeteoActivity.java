@@ -26,6 +26,7 @@ import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 import adrianmmudarra.es.tema4_json_acdat.R;
+import adrianmmudarra.es.tema4_json_acdat.adapter.ApiAdapter;
 import adrianmmudarra.es.tema4_json_acdat.model.metereologia.Ciudad;
 import adrianmmudarra.es.tema4_json_acdat.model.metereologia.Tiempo;
 import adrianmmudarra.es.tema4_json_acdat.network.ApiService;
@@ -51,7 +52,6 @@ public class MeteoActivity extends AppCompatActivity {
     TextView txt_ciudad, txt_temperatura, txt_fecha, txt_viento, txt_nubes, txt_presion, txt_humedad, txt_amanecer, txt_anochecer, txt_minmax;
 
     private static final String URL_city = "http://adrianm.alumno.mobi/city.list.json";
-    private static final String URL_TIEMPO = "https://api.openweathermap.org/";
     //"http://api.openweathermap.org/data/2.5/weather?id={id}&units=metric&APPID=8c8452ba700cbab5cd5c81d6cb3dd338";
 
     @Override
@@ -79,23 +79,7 @@ public class MeteoActivity extends AppCompatActivity {
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
-        OkHttpClient okHttpClient = new OkHttpClient.Builder()
-                .connectTimeout(10, TimeUnit.SECONDS)
-                .readTimeout(10, TimeUnit.SECONDS)
-                .writeTimeout(5, TimeUnit.SECONDS)
-                .build();
-
-        Gson gson = new GsonBuilder()
-                .setDateFormat("dd-MM-yyyy")
-                .create();
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(URL_TIEMPO)
-                .addConverterFactory(GsonConverterFactory.create(gson))
-                .client(okHttpClient)
-                .build();
-
-        apiService = retrofit.create(ApiService.class);
+        apiService = ApiAdapter.getInstanceTiempo();
 
         descargarJsonCiudades();
 
