@@ -10,13 +10,11 @@ import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class ApiAdapterTiempo {
-
+public class ApiAdapterBizi {
     private static ApiService API_SERVICE;
-    public static final String URL_TIEMPO = "https://api.openweathermap.org/";
+    private static final String URL_BIZI = "https://www.zaragoza.es/";
 
     public static synchronized ApiService getInstance() {
-
         if (API_SERVICE == null) {
             OkHttpClient okHttpClient = new OkHttpClient.Builder()
                     .connectTimeout(10, TimeUnit.SECONDS)
@@ -29,7 +27,7 @@ public class ApiAdapterTiempo {
                     .create();
 
             Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl(URL_TIEMPO)
+                    .baseUrl(URL_BIZI)
                     .addConverterFactory(GsonConverterFactory.create(gson))
                     .client(okHttpClient)
                     .build();

@@ -35,4 +35,5 @@ dependencies {
     implementation 'cz.msebera.android:httpclient:4.4.1.1'
     implementation 'com.toptoche.searchablespinner:searchablespinnerlibrary:1.3.1'
     implementation 'org.apache.commons:commons-lang3:3.6'
+    implementation 'com.squareup.retrofit2:converter-simplexml:2.4.0'
 }

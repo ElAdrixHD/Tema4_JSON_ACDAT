@@ -19,7 +19,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.MeteoActivity" />
-        <activity android:name=".ui.ConversorActivity"></activity>
+        <activity android:name=".ui.ConversorActivity" />
+        <activity android:name=".ui.BiziActivity"></activity>
     </application>
 
 </manifest>
