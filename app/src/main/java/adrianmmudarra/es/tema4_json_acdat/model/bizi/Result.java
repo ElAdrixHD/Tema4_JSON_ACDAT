@@ -1,9 +1,13 @@
 package adrianmmudarra.es.tema4_json_acdat.model.bizi;
 
+import android.support.annotation.NonNull;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Result {
+import java.io.Serializable;
+
+public class Result implements Serializable {
 
     @SerializedName("id")
     @Expose
@@ -114,5 +118,11 @@ public class Result {
 
     public void setIcon(String icon) {
         this.icon = icon;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return getTitle();
     }
 }

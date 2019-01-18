@@ -20,7 +20,8 @@
         </activity>
         <activity android:name=".ui.MeteoActivity" />
         <activity android:name=".ui.ConversorActivity" />
-        <activity android:name=".ui.BiziActivity"></activity>
+        <activity android:name=".ui.BiziActivity" />
+        <activity android:name=".ui.EstacionActivity"></activity>
     </application>
 
 </manifest>

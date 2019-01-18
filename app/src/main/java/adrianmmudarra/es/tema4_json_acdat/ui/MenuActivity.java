@@ -41,5 +41,11 @@ public class MenuActivity extends AppCompatActivity {
                 startActivity(new Intent(MenuActivity.this, ConversorActivity.class));
             }
         });
+        ej3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MenuActivity.this, BiziActivity.class));
+            }
+        });
     }
 }

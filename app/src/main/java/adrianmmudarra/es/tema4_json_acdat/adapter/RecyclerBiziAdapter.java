@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import adrianmmudarra.es.tema4_json_acdat.R;
 import adrianmmudarra.es.tema4_json_acdat.model.bizi.Bizi;
@@ -37,26 +38,38 @@ public class RecyclerBiziAdapter extends RecyclerView.Adapter<RecyclerBiziAdapte
 
     @Override
     public void onBindViewHolder(@NonNull BiziViewHolder biziViewHolder, int i) {
-        biziViewHolder.tv_id.setText(repo.get(i).getId());
+        biziViewHolder.tv_id.setText("ID parada: "+repo.get(i).getId());
         biziViewHolder.tv_calle.setText(repo.get(i).getTitle());
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return this.repo.size();
+    }
+
+    public Result getItem(int pos){
+        return this.repo.get(pos);
+    }
+
+    public void clear(){
+        this.repo.clear();
+    }
+
+    public void addAll(List<Result> all){
+        this.repo.addAll(all);
     }
 
     @Override
     public void onClick(View v) {
-
+        this.listener.onClick(v);
     }
 
-    public class BiziViewHolder extends RecyclerView.ViewHolder {
+    class BiziViewHolder extends RecyclerView.ViewHolder {
 
         TextView tv_id;
         TextView tv_calle;
 
-        public BiziViewHolder(@NonNull View itemView) {
+        BiziViewHolder(@NonNull View itemView) {
             super(itemView);
             tv_calle = itemView.findViewById(R.id.tv_bizi_item_calle);
             tv_id = itemView.findViewById(R.id.tv_bizi_item_id);
