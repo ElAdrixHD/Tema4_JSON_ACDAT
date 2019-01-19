@@ -1,6 +1,7 @@
 package adrianmmudarra.es.tema4_json_acdat.network;
 
 import adrianmmudarra.es.tema4_json_acdat.model.bizi.Bizi;
+import adrianmmudarra.es.tema4_json_acdat.model.bizi.Result;
 import adrianmmudarra.es.tema4_json_acdat.model.conversor.Conversor;
 import adrianmmudarra.es.tema4_json_acdat.model.conversor.Monedas;
 import adrianmmudarra.es.tema4_json_acdat.model.metereologia.Tiempo;
@@ -23,5 +24,5 @@ public interface ApiService {
     Call<Bizi> getBizis();
 
     @GET("sede/servicio/urbanismo-infraestructuras/estacion-bicicleta/{id}.json")
-    Call<Bizi> getBizisporId(@Path("id") String id);
+    Call<Result> getBizisporId(@Path("id") String id);
 }

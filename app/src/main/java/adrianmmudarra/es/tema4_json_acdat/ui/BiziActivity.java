@@ -64,9 +64,7 @@ public class BiziActivity extends AppCompatActivity  implements View.OnClickList
     @Override
     public void onClick(View v) {
         Intent i = new Intent(BiziActivity.this, EstacionActivity.class);
-        Bundle b = new Bundle();
-        b.putSerializable(EstacionActivity.KEY,adapter.getItem(recyclerView.getChildAdapterPosition(v)));
-        i.putExtra(EstacionActivity.KEY,b);
+        i.putExtra(EstacionActivity.KEY,adapter.getItem(recyclerView.getChildAdapterPosition(v)).getId());
         startActivity(i);
     }
 }
