@@ -1,6 +1,7 @@
 package adrianmmudarra.es.tema4_json_acdat.ui;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Environment;
 import android.support.annotation.NonNull;
@@ -185,6 +186,9 @@ public class MalagaActivity extends AppCompatActivity implements SwipeRefreshLay
 
     @Override
     public void onClick(View v) {
-
+        Intent i = new Intent(MalagaActivity.this,MapaMalagaActivity.class);
+        i.putExtra(MapaMalagaActivity.KEY,adapter.getItem(recyclerView.getChildAdapterPosition(v)).getLatitud());
+        i.putExtra(MapaMalagaActivity.KEY2,adapter.getItem(recyclerView.getChildAdapterPosition(v)).getLongitud());
+        startActivity(i);
     }
 }

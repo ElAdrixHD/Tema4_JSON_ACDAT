@@ -3,7 +3,7 @@
     package="adrianmmudarra.es.tema4_json_acdat">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -13,7 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.MalagaActivity"></activity>
+        <activity android:name=".ui.MapaMalagaActivity"></activity>
+        <activity android:name=".ui.MalagaActivity" />
         <activity android:name=".ui.RssActivity" />
 
         <uses-library
