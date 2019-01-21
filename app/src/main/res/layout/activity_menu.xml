@@ -29,18 +29,21 @@
         android:id="@+id/btn_menu_ej4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:enabled="false"
         android:text="Ejercicio 4" />
 
     <Button
         android:id="@+id/btn_menu_ej5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:enabled="false"
         android:text="Ejercicio 5" />
 
     <Button
         android:id="@+id/btn_menu_ej6"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:enabled="false"
         android:text="Ejercicio 6" />
 
     <Button
