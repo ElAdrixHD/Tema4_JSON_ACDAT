@@ -1,6 +1,7 @@
 package adrianmmudarra.es.tema4_json_acdat.ui;
 
 import android.content.Intent;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
@@ -65,6 +66,10 @@ public class EstacionActivity extends AppCompatActivity implements OnMapReadyCal
                 tv_nombre.setText(result.getTitle());
                 tv_bicis.setText(Integer.toString(result.getBicisDisponibles()));
                 tv_anclajes.setText(Integer.toString(result.getAnclajesDisponibles()));
+
+                LatLng zona = new LatLng(result.getGeometry().getCoordinates().get(1), result.getGeometry().getCoordinates().get(0));
+                gMap.addMarker(new MarkerOptions().position(zona).title(result.getTitle()));
+                gMap.moveCamera(CameraUpdateFactory.newLatLng(zona));
             }
 
             @Override
@@ -78,9 +83,16 @@ public class EstacionActivity extends AppCompatActivity implements OnMapReadyCal
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        LatLng seattle = new LatLng(47.6062095, -122.3320708);
-        gMap.addMarker(new MarkerOptions().position(seattle).title("Seattle"));
-        gMap.moveCamera(CameraUpdateFactory.newLatLng(seattle));
+        gMap = googleMap;
+        gMap.setMinZoomPreference(18);
+        gMap.setIndoorEnabled(true);
+
+        UiSettings uiSettings = gMap.getUiSettings();
+        uiSettings.setIndoorLevelPickerEnabled(true);
+        uiSettings.setMyLocationButtonEnabled(true);
+        uiSettings.setMapToolbarEnabled(true);
+        uiSettings.setCompassEnabled(true);
+        uiSettings.setZoomControlsEnabled(true);
     }
 
     private void mostrarMensaje(String message) {
