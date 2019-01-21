@@ -8,6 +8,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
@@ -26,6 +27,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -57,7 +59,6 @@ public class MalagaActivity extends AppCompatActivity implements SwipeRefreshLay
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_malaga);
-        apiService = ApiAdapterMalaga.getInstance();
         ComprobarPermisos();
         inicializar();
     }
@@ -69,7 +70,10 @@ public class MalagaActivity extends AppCompatActivity implements SwipeRefreshLay
         adapter = new RecyclerMalagaAdapter(this,this);
         recyclerView.setAdapter(adapter);
         recyclerView.setOnClickListener(this);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        apiService = ApiAdapterMalaga.getInstance();
         mostrarJSON();
+        mostrarMensaje("Arrastre hacia abajo para recargar");
     }
 
     private void mostrarJSON() {
@@ -77,6 +81,7 @@ public class MalagaActivity extends AppCompatActivity implements SwipeRefreshLay
         call.enqueue(new Callback<List<BiciMalaga>>() {
             @Override
             public void onResponse(Call<List<BiciMalaga>> call, Response<List<BiciMalaga>> response) {
+                adapter.clear();
                 adapter.addAll(response.body());
                 adapter.notifyDataSetChanged();
             }
@@ -173,6 +178,7 @@ public class MalagaActivity extends AppCompatActivity implements SwipeRefreshLay
 
     @Override
     public void onRefresh() {
+        descargarFichero();
         mostrarJSON();
         swipeRefreshLayout.setRefreshing(false);
     }

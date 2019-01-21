@@ -1,5 +1,6 @@
 package adrianmmudarra.es.tema4_json_acdat.network;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import adrianmmudarra.es.tema4_json_acdat.model.bizi.Bizi;

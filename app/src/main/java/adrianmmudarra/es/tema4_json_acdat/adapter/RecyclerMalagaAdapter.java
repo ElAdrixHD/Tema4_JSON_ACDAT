@@ -30,17 +30,17 @@ public class RecyclerMalagaAdapter extends RecyclerView.Adapter<RecyclerMalagaAd
     @NonNull
     @Override
     public RecyclerMalagaAdapter.MalagaViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View v = ((LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.bizi_item,viewGroup,false);
+        View v = ((LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.malaga_item,viewGroup,false);
         v.setOnClickListener(this);
         return new RecyclerMalagaAdapter.MalagaViewHolder(v);
     }
 
     @Override
     public void onBindViewHolder(@NonNull MalagaViewHolder malagaViewHolder, int i) {
-        malagaViewHolder.tv_nombre.setText("ID parada: "+repo.get(i).getNombre());
-        malagaViewHolder.tv_dir.setText(repo.get(i).getDireccion());
-        malagaViewHolder.tv_libres.setText(repo.get(i).getNumLibres());
-        malagaViewHolder.tv_ocupadas.setText(repo.get(i).getNumOcupadas());
+       malagaViewHolder.tv_nombre.setText(repo.get(i).getNombre());
+       malagaViewHolder.tv_dir.setText(repo.get(i).getDireccion());
+       malagaViewHolder.tv_libres.setText(repo.get(i).getNum_libres());
+       malagaViewHolder.tv_ocupadas.setText(repo.get(i).getNum_ocupadas());
     }
 
     @Override
