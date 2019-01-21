@@ -47,5 +47,11 @@ public class MenuActivity extends AppCompatActivity {
                 startActivity(new Intent(MenuActivity.this, BiziActivity.class));
             }
         });
+        ej4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MenuActivity.this, RssActivity.class));
+            }
+        });
     }
 }
