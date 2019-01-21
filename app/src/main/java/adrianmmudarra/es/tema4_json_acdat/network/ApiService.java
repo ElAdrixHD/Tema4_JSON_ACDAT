@@ -1,9 +1,12 @@
 package adrianmmudarra.es.tema4_json_acdat.network;
 
+import java.util.List;
+
 import adrianmmudarra.es.tema4_json_acdat.model.bizi.Bizi;
 import adrianmmudarra.es.tema4_json_acdat.model.bizi.Result;
 import adrianmmudarra.es.tema4_json_acdat.model.conversor.Conversor;
 import adrianmmudarra.es.tema4_json_acdat.model.conversor.Monedas;
+import adrianmmudarra.es.tema4_json_acdat.model.malaga.BiciMalaga;
 import adrianmmudarra.es.tema4_json_acdat.model.metereologia.Tiempo;
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -25,4 +28,7 @@ public interface ApiService {
 
     @GET("sede/servicio/urbanismo-infraestructuras/estacion-bicicleta/{id}.json")
     Call<Result> getBizisporId(@Path("id") String id);
+
+    @GET("uploads/bicis.json")
+    Call<List<BiciMalaga>> getBicisMalaga();
 }

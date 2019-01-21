@@ -5,8 +5,11 @@ import android.content.pm.PackageManager;
 import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,25 +31,61 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import adrianmmudarra.es.tema4_json_acdat.R;
+import adrianmmudarra.es.tema4_json_acdat.adapter.ApiAdapterMalaga;
+import adrianmmudarra.es.tema4_json_acdat.adapter.RecyclerMalagaAdapter;
 import adrianmmudarra.es.tema4_json_acdat.model.malaga.BiciMalaga;
+import adrianmmudarra.es.tema4_json_acdat.network.ApiService;
 import adrianmmudarra.es.tema4_json_acdat.network.RestClient;
 import cz.msebera.android.httpclient.Header;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
-public class MalagaActivity extends AppCompatActivity {
+public class MalagaActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener, View.OnClickListener {
 
     File miCSV;
     File miJSON;
-    TextView tv;
     final String url = "https://datosabiertos.malaga.eu/recursos/transporte/EMT/EMTocupestacbici/ocupestacbici.csv";
     final static String WEB = "http://adrianm.alumno.mobi/upload.php";
     Pattern pattern = Pattern.compile(",");
+    SwipeRefreshLayout swipeRefreshLayout;
+    RecyclerView recyclerView;
+    RecyclerMalagaAdapter adapter;
+    ApiService apiService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_malaga);
-        tv = findViewById(R.id.tv);
+        apiService = ApiAdapterMalaga.getInstance();
         ComprobarPermisos();
+        inicializar();
+    }
+
+    private void inicializar() {
+        swipeRefreshLayout = findViewById(R.id.swipe);
+        recyclerView = findViewById(R.id.recycler);
+        swipeRefreshLayout.setOnRefreshListener(this);
+        adapter = new RecyclerMalagaAdapter(this,this);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setOnClickListener(this);
+        mostrarJSON();
+    }
+
+    private void mostrarJSON() {
+        Call<List<BiciMalaga>> call = apiService.getBicisMalaga();
+        call.enqueue(new Callback<List<BiciMalaga>>() {
+            @Override
+            public void onResponse(Call<List<BiciMalaga>> call, Response<List<BiciMalaga>> response) {
+                adapter.addAll(response.body());
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onFailure(Call<List<BiciMalaga>> call, Throwable t) {
+                mostrarMensaje(t.getMessage());
+            }
+        });
     }
 
     private void ComprobarPermisos() {
@@ -71,7 +110,6 @@ public class MalagaActivity extends AppCompatActivity {
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, File file) {
-                mostrarMensaje("Todo OK");
                 leerCSV();
             }
         });
@@ -87,7 +125,6 @@ public class MalagaActivity extends AppCompatActivity {
             }) .collect(Collectors.toList());
             ObjectMapper mapper = new ObjectMapper();
             mapper.enable(SerializationFeature.INDENT_OUTPUT);
-            tv.setText(mapper.writeValueAsString(bicis));
             mapper.writeValue(miJSON, bicis);
             subirJSON();
         } catch (FileNotFoundException e) {
@@ -110,7 +147,6 @@ public class MalagaActivity extends AppCompatActivity {
 
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, String responseString) {
-                    mostrarMensaje(responseString);
                 }
             });
         } catch (FileNotFoundException e) {
@@ -135,4 +171,14 @@ public class MalagaActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onRefresh() {
+        mostrarJSON();
+        swipeRefreshLayout.setRefreshing(false);
+    }
+
+    @Override
+    public void onClick(View v) {
+
+    }
 }

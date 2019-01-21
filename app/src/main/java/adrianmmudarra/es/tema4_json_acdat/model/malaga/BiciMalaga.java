@@ -1,32 +1,70 @@
 package adrianmmudarra.es.tema4_json_acdat.model.malaga;
 
-public class BiciMalaga {
-    private String id;
-    private String nombre;
-    private String nombreCiudad;
-    private String direccion;
-    private String id_estado;
-    private String nombre_estado;
-    private String num_derbis;
-    private String num_libres;
-    private String num_ocupadas;
-    private String latitud;
-    private String longitud;
-    private String id_externo;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
-    public BiciMalaga(String id, String nombre, String nombreCiudad, String direccion, String id_estado, String nombre_estado, String num_derbis, String num_libres, String num_ocupadas, String latitud, String longitud, String id_externo) {
-        this.id = id;
-        this.nombre = nombre;
-        this.nombreCiudad = nombreCiudad;
+public class BiciMalaga {
+
+    @SerializedName("direccion")
+    @Expose
+    private String direccion;
+    @SerializedName("id")
+    @Expose
+    private String id;
+    @SerializedName("id_estado")
+    @Expose
+    private String idEstado;
+    @SerializedName("id_externo")
+    @Expose
+    private String idExterno;
+    @SerializedName("latitud")
+    @Expose
+    private String latitud;
+    @SerializedName("longitud")
+    @Expose
+    private String longitud;
+    @SerializedName("nombre")
+    @Expose
+    private String nombre;
+    @SerializedName("nombreCiudad")
+    @Expose
+    private String nombreCiudad;
+    @SerializedName("nombre_estado")
+    @Expose
+    private String nombreEstado;
+    @SerializedName("num_derbis")
+    @Expose
+    private String numDerbis;
+    @SerializedName("num_libres")
+    @Expose
+    private String numLibres;
+    @SerializedName("num_ocupadas")
+    @Expose
+    private String numOcupadas;
+
+    public BiciMalaga(String direccion, String id, String idEstado, String idExterno, String latitud, String longitud, String nombre, String nombreCiudad, String nombreEstado, String numDerbis, String numLibres, String numOcupadas) {
+        super();
         this.direccion = direccion;
-        this.id_estado = id_estado;
-        this.nombre_estado = nombre_estado;
-        this.num_derbis = num_derbis;
-        this.num_libres = num_libres;
-        this.num_ocupadas = num_ocupadas;
+        this.id = id;
+        this.idEstado = idEstado;
+        this.idExterno = idExterno;
         this.latitud = latitud;
         this.longitud = longitud;
-        this.id_externo = id_externo;
+        this.nombre = nombre;
+        this.nombreCiudad = nombreCiudad;
+        this.nombreEstado = nombreEstado;
+        this.numDerbis = numDerbis;
+        this.numLibres = numLibres;
+        this.numOcupadas = numOcupadas;
+    }
+
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
     }
 
     public String getId() {
@@ -37,68 +75,20 @@ public class BiciMalaga {
         this.id = id;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getIdEstado() {
+        return idEstado;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setIdEstado(String idEstado) {
+        this.idEstado = idEstado;
     }
 
-    public String getNombreCiudad() {
-        return nombreCiudad;
+    public String getIdExterno() {
+        return idExterno;
     }
 
-    public void setNombreCiudad(String nombreCiudad) {
-        this.nombreCiudad = nombreCiudad;
-    }
-
-    public String getDireccion() {
-        return direccion;
-    }
-
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
-    }
-
-    public String getId_estado() {
-        return id_estado;
-    }
-
-    public void setId_estado(String id_estado) {
-        this.id_estado = id_estado;
-    }
-
-    public String getNombre_estado() {
-        return nombre_estado;
-    }
-
-    public void setNombre_estado(String nombre_estado) {
-        this.nombre_estado = nombre_estado;
-    }
-
-    public String getNum_derbis() {
-        return num_derbis;
-    }
-
-    public void setNum_derbis(String num_derbis) {
-        this.num_derbis = num_derbis;
-    }
-
-    public String getNum_libres() {
-        return num_libres;
-    }
-
-    public void setNum_libres(String num_libres) {
-        this.num_libres = num_libres;
-    }
-
-    public String getNum_ocupadas() {
-        return num_ocupadas;
-    }
-
-    public void setNum_ocupadas(String num_ocupadas) {
-        this.num_ocupadas = num_ocupadas;
+    public void setIdExterno(String idExterno) {
+        this.idExterno = idExterno;
     }
 
     public String getLatitud() {
@@ -117,12 +107,52 @@ public class BiciMalaga {
         this.longitud = longitud;
     }
 
-    public String getId_externo() {
-        return id_externo;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setId_externo(String id_externo) {
-        this.id_externo = id_externo;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getNombreCiudad() {
+        return nombreCiudad;
+    }
+
+    public void setNombreCiudad(String nombreCiudad) {
+        this.nombreCiudad = nombreCiudad;
+    }
+
+    public String getNombreEstado() {
+        return nombreEstado;
+    }
+
+    public void setNombreEstado(String nombreEstado) {
+        this.nombreEstado = nombreEstado;
+    }
+
+    public String getNumDerbis() {
+        return numDerbis;
+    }
+
+    public void setNumDerbis(String numDerbis) {
+        this.numDerbis = numDerbis;
+    }
+
+    public String getNumLibres() {
+        return numLibres;
+    }
+
+    public void setNumLibres(String numLibres) {
+        this.numLibres = numLibres;
+    }
+
+    public String getNumOcupadas() {
+        return numOcupadas;
+    }
+
+    public void setNumOcupadas(String numOcupadas) {
+        this.numOcupadas = numOcupadas;
     }
 
 }
