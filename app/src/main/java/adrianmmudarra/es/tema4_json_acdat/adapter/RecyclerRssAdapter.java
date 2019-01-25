@@ -14,14 +14,16 @@ import java.util.List;
 import adrianmmudarra.es.tema4_json_acdat.R;
 import adrianmmudarra.es.tema4_json_acdat.model.rss.FeedItem;
 
-public class RecyclerRssAdapter extends RecyclerView.Adapter<RecyclerRssAdapter.RssViewHolder>{
+public class RecyclerRssAdapter extends RecyclerView.Adapter<RecyclerRssAdapter.RssViewHolder> implements View.OnClickListener{
 
     private ArrayList<FeedItem> repo;
     private Context context;
+    private View.OnClickListener listener;
 
-    public RecyclerRssAdapter(Context context) {
+    public RecyclerRssAdapter(Context context, View.OnClickListener listener) {
         this.repo = new ArrayList<>();
         this.context = context;
+        this.listener = listener;
     }
 
     @NonNull
@@ -53,6 +55,11 @@ public class RecyclerRssAdapter extends RecyclerView.Adapter<RecyclerRssAdapter.
 
     public void addAll(List<FeedItem> all){
         this.repo.addAll(all);
+    }
+
+    @Override
+    public void onClick(View view) {
+        this.listener.onClick(view);
     }
 
     class RssViewHolder extends RecyclerView.ViewHolder {

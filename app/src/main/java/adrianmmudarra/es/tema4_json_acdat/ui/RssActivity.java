@@ -53,19 +53,19 @@ public class RssActivity extends AppCompatActivity implements View.OnClickListen
         btn_5 = findViewById(R.id.btn_rss_5);
         btn_6 = findViewById(R.id.btn_rss_6);
         recyclerView = findViewById(R.id.recycler_rss);
-        adapter = new RecyclerRssAdapter(this);
+        adapter = new RecyclerRssAdapter(this,this);
         recyclerView.setAdapter(adapter);
+        recyclerView.setOnClickListener(this);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        btn_1.setOnClickListener(v-> onClick(v));
-        btn_2.setOnClickListener(v-> onClick(v));
-        btn_3.setOnClickListener(v-> onClick(v));
-        btn_4.setOnClickListener(v-> onClick(v));
-        btn_5.setOnClickListener(v-> onClick(v));
-        btn_6.setOnClickListener(v-> onClick(v));
+        btn_1.setOnClickListener(v-> onClickBoton(v));
+        btn_2.setOnClickListener(v-> onClickBoton(v));
+        btn_3.setOnClickListener(v-> onClickBoton(v));
+        btn_4.setOnClickListener(v-> onClickBoton(v));
+        btn_5.setOnClickListener(v-> onClickBoton(v));
+        btn_6.setOnClickListener(v-> onClickBoton(v));
     }
 
-    @Override
-    public void onClick(View view) {
+    public void onClickBoton(View view) {
         switch (view.getId()){
             case R.id.btn_rss_1:
                 apiService = ApiAdapter.getInstanceRss("https://www.abc.es/");
@@ -113,5 +113,10 @@ public class RssActivity extends AppCompatActivity implements View.OnClickListen
 
     private void mostrarMensaje(String message) {
         Toast.makeText(this,message,Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onClick(View view) {
+
     }
 }
