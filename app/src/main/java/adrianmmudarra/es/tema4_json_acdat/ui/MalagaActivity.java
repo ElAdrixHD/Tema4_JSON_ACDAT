@@ -12,7 +12,6 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -21,20 +20,17 @@ import com.loopj.android.http.FileAsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.TextHttpResponseHandler;
 
-import org.w3c.dom.Text;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import adrianmmudarra.es.tema4_json_acdat.R;
-import adrianmmudarra.es.tema4_json_acdat.adapter.ApiAdapterMalaga;
+import adrianmmudarra.es.tema4_json_acdat.adapter.ApiAdapter;
 import adrianmmudarra.es.tema4_json_acdat.adapter.RecyclerMalagaAdapter;
 import adrianmmudarra.es.tema4_json_acdat.model.malaga.BiciMalaga;
 import adrianmmudarra.es.tema4_json_acdat.network.ApiService;
@@ -72,7 +68,7 @@ public class MalagaActivity extends AppCompatActivity implements SwipeRefreshLay
         recyclerView.setAdapter(adapter);
         recyclerView.setOnClickListener(this);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        apiService = ApiAdapterMalaga.getInstance();
+        apiService = ApiAdapter.getInstanceMalaga();
         mostrarJSON();
         mostrarMensaje("Arrastre hacia abajo para recargar");
     }

@@ -18,8 +18,7 @@ import java.util.Map;
 import java.util.Objects;
 
 import adrianmmudarra.es.tema4_json_acdat.R;
-import adrianmmudarra.es.tema4_json_acdat.adapter.ApiAdapterMoneda;
-import adrianmmudarra.es.tema4_json_acdat.adapter.ApiAdapterTiempo;
+import adrianmmudarra.es.tema4_json_acdat.adapter.ApiAdapter;
 import adrianmmudarra.es.tema4_json_acdat.model.conversor.Conversor;
 import adrianmmudarra.es.tema4_json_acdat.model.conversor.Monedas;
 import adrianmmudarra.es.tema4_json_acdat.network.ApiService;
@@ -60,7 +59,7 @@ public class ConversorActivity extends AppCompatActivity {
 
         arraymonedas = new ArrayList<>();
 
-        apiService = ApiAdapterMoneda.getInstance();
+        apiService = ApiAdapter.getInstanceMoneda();
 
         spinnerOrigen.setTitle("Moneda que desea entregar");
         spinnerOrigen.setPositiveButton("OK");

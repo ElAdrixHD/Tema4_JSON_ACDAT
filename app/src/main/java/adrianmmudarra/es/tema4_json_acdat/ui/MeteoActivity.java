@@ -23,7 +23,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 import adrianmmudarra.es.tema4_json_acdat.R;
-import adrianmmudarra.es.tema4_json_acdat.adapter.ApiAdapterTiempo;
+import adrianmmudarra.es.tema4_json_acdat.adapter.ApiAdapter;
 import adrianmmudarra.es.tema4_json_acdat.model.metereologia.Ciudad;
 import adrianmmudarra.es.tema4_json_acdat.model.metereologia.Tiempo;
 import adrianmmudarra.es.tema4_json_acdat.network.ApiService;
@@ -73,7 +73,7 @@ public class MeteoActivity extends AppCompatActivity {
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
-        apiService = ApiAdapterTiempo.getInstance();
+        apiService = ApiAdapter.getInstanceTiempo();
 
         descargarJsonCiudades();
 

@@ -9,6 +9,7 @@ import adrianmmudarra.es.tema4_json_acdat.model.conversor.Conversor;
 import adrianmmudarra.es.tema4_json_acdat.model.conversor.Monedas;
 import adrianmmudarra.es.tema4_json_acdat.model.malaga.BiciMalaga;
 import adrianmmudarra.es.tema4_json_acdat.model.metereologia.Tiempo;
+import adrianmmudarra.es.tema4_json_acdat.model.rss.Feed;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
@@ -32,4 +33,7 @@ public interface ApiService {
 
     @GET("uploads/bicis.json")
     Call<List<BiciMalaga>> getBicisMalaga();
+
+    @GET("{url}")
+    Call<Feed> getRss(@Path("url") String url);
 }

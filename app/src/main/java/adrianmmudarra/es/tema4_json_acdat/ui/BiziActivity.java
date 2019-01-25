@@ -9,7 +9,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import adrianmmudarra.es.tema4_json_acdat.R;
-import adrianmmudarra.es.tema4_json_acdat.adapter.ApiAdapterBizi;
+import adrianmmudarra.es.tema4_json_acdat.adapter.ApiAdapter;
 import adrianmmudarra.es.tema4_json_acdat.adapter.RecyclerBiziAdapter;
 import adrianmmudarra.es.tema4_json_acdat.model.bizi.Bizi;
 import adrianmmudarra.es.tema4_json_acdat.network.ApiService;
@@ -36,7 +36,7 @@ public class BiziActivity extends AppCompatActivity  implements View.OnClickList
         recyclerView.setAdapter(adapter);
         recyclerView.setOnClickListener(this);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        apiService = ApiAdapterBizi.getInstance();
+        apiService = ApiAdapter.getInstanceBizi();
         
         descargarBizis();
     }

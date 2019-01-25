@@ -19,7 +19,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.security.Key;
 
 import adrianmmudarra.es.tema4_json_acdat.R;
-import adrianmmudarra.es.tema4_json_acdat.adapter.ApiAdapterBizi;
+import adrianmmudarra.es.tema4_json_acdat.adapter.ApiAdapter;
 import adrianmmudarra.es.tema4_json_acdat.model.bizi.Result;
 import adrianmmudarra.es.tema4_json_acdat.network.ApiService;
 import retrofit2.Call;
@@ -52,7 +52,7 @@ public class EstacionActivity extends AppCompatActivity implements OnMapReadyCal
         tv_anclajes= findViewById(R.id.tv_estacion_anclajes);
 
 
-        apiService = ApiAdapterBizi.getInstance();
+        apiService = ApiAdapter.getInstanceBizi();
 
         descargarEstacion();
     }
