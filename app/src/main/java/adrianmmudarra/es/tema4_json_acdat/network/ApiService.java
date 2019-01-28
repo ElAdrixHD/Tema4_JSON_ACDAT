@@ -3,6 +3,8 @@ package adrianmmudarra.es.tema4_json_acdat.network;
 import java.util.ArrayList;
 import java.util.List;
 
+import adrianmmudarra.es.tema4_json_acdat.model.api.Cooperativa;
+import adrianmmudarra.es.tema4_json_acdat.model.api.Producto;
 import adrianmmudarra.es.tema4_json_acdat.model.bizi.Bizi;
 import adrianmmudarra.es.tema4_json_acdat.model.bizi.Result;
 import adrianmmudarra.es.tema4_json_acdat.model.conversor.Conversor;
@@ -36,4 +38,10 @@ public interface ApiService {
 
     @GET("{url}")
     Call<Feed> getRss(@Path("url") String url);
+
+    @GET("api/cooperativa")
+    Call<List<Cooperativa>>getCooperativas();
+
+    @GET("api/producto")
+    Call<List<Producto>>getProductos();
 }

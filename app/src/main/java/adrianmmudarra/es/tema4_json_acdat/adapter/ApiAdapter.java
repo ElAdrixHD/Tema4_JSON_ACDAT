@@ -20,10 +20,12 @@ public class ApiAdapter {
     private static ApiService API_SERVICE_TIEMPO;
     private static ApiService API_SERVICE_MALAGA;
     private static ApiService API_SERVICE_RSS;
+    private static ApiService API_SERVICE_API;
     private static final String URL_MALAGA = "http://adrianm.alumno.mobi/";
     private static final String URL_BIZI = "https://www.zaragoza.es/";
     private static final String URL_MONEDA = "https://openexchangerates.org/";
     private static final String URL_TIEMPO = "https://api.openweathermap.org/";
+    private static final String URL_API = "https://adrianmmudarra.es/";
 
     public static synchronized ApiService getInstanceBizi() {
         if (API_SERVICE_BIZI == null) {
@@ -134,5 +136,28 @@ public class ApiAdapter {
 
         API_SERVICE_RSS = retrofit.create(ApiService.class);
         return  API_SERVICE_RSS;
+    }
+
+    public static synchronized ApiService getInstanceApi() {
+        if (API_SERVICE_API == null) {
+            OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                    .connectTimeout(10, TimeUnit.SECONDS)
+                    .readTimeout(10, TimeUnit.SECONDS)
+                    .writeTimeout(5, TimeUnit.SECONDS)
+                    .build();
+
+            Gson gson = new GsonBuilder()
+                    .setDateFormat("dd-MM-yyyy")
+                    .create();
+
+            Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl(URL_API)
+                    .addConverterFactory(GsonConverterFactory.create(gson))
+                    .client(okHttpClient)
+                    .build();
+
+            API_SERVICE_API = retrofit.create(ApiService.class);
+        }
+        return  API_SERVICE_API;
     }
 }
