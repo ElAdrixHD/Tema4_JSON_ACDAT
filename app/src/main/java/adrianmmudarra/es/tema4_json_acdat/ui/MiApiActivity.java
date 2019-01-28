@@ -156,6 +156,6 @@ public class MiApiActivity extends AppCompatActivity implements RepoApi {
 
     @Override
     public String getNombreProd(int id) {
-        return ((Producto)spinnerCoop.getSelectedItem()).getNombreProducto();
+        return ((Producto)spinnerProd.getSelectedItem()).getNombreProducto();
     }
 }
