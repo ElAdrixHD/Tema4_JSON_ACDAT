@@ -3,8 +3,11 @@ package adrianmmudarra.es.tema4_json_acdat.ui;
 import android.app.DatePickerDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -15,7 +18,11 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import adrianmmudarra.es.tema4_json_acdat.adapter.RecyclerMalagaAdapter;
+import adrianmmudarra.es.tema4_json_acdat.adapter.RecyclerMiApiAdapter;
 import adrianmmudarra.es.tema4_json_acdat.model.api.Producto;
+import adrianmmudarra.es.tema4_json_acdat.model.api.Subasta;
+import adrianmmudarra.es.tema4_json_acdat.utils.RepoApi;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -26,7 +33,7 @@ import adrianmmudarra.es.tema4_json_acdat.model.api.Cooperativa;
 import adrianmmudarra.es.tema4_json_acdat.network.ApiService;
 import adrianmmudarra.es.tema4_json_acdat.utils.DatePickerFragment;
 
-public class MiApiActivity extends AppCompatActivity {
+public class MiApiActivity extends AppCompatActivity implements RepoApi {
 
     EditText selectFecha;
     Spinner spinnerCoop, spinnerProd;
@@ -35,6 +42,9 @@ public class MiApiActivity extends AppCompatActivity {
     ArrayList<Cooperativa> arrayListCooperativa;
     ArrayList<Producto> arrayListProducto;
     ApiService apiService;
+    Button limpiar, buscar;
+    RecyclerView recyclerView;
+    RecyclerMiApiAdapter apiAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,14 +54,20 @@ public class MiApiActivity extends AppCompatActivity {
     }
 
     private void inicializacion() {
+        recyclerView = findViewById(R.id.recycler_api);
+        limpiar = findViewById(R.id.btn_api_limpiar);
+        buscar = findViewById(R.id.btn_api_buscar);
         spinnerCoop = findViewById(R.id.spinner_api_coop);
         spinnerProd = findViewById(R.id.spinner_api_prod);
         selectFecha = findViewById(R.id.ed_api_fecha);
-        selectFecha.setOnClickListener(view -> {
-            mostrarPicker();
-        });
+        selectFecha.setOnClickListener(view -> mostrarPicker());
+        limpiar.setOnClickListener(v -> limpiarDatos());
+        buscar.setOnClickListener(v -> buscarDatos());
         arrayListCooperativa = new ArrayList<>();
         arrayListProducto = new ArrayList<>();
+        apiAdapter = new RecyclerMiApiAdapter(this,this);
+        recyclerView.setAdapter(apiAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
         apiService = ApiAdapter.getInstanceApi();
 
         adapterCooperativa = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item);
@@ -61,6 +77,29 @@ public class MiApiActivity extends AppCompatActivity {
         spinnerCoop.setAdapter(adapterCooperativa);
         spinnerProd.setAdapter(adapterProducto);
         descargarSpinners();
+    }
+
+    private void buscarDatos() {
+        Call<List<Subasta>> call = apiService.getSubasta();
+        call.enqueue(new Callback<List<Subasta>>() {
+            @Override
+            public void onResponse(Call<List<Subasta>> call, Response<List<Subasta>> response) {
+                apiAdapter.clear();
+                apiAdapter.addAll(response.body());
+                apiAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onFailure(Call<List<Subasta>> call, Throwable t) {
+                mostrarMensaje(t.getMessage());
+            }
+        });
+    }
+
+    private void limpiarDatos() {
+        selectFecha.setText("");
+        spinnerCoop.setSelection(0);
+        spinnerProd.setSelection(0);
     }
 
     private void descargarSpinners() {
@@ -108,5 +147,15 @@ public class MiApiActivity extends AppCompatActivity {
 
     private void mostrarMensaje(String mensaje) {
         Toast.makeText(MiApiActivity.this, mensaje, Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public String getNombreCoop(int id) {
+        return ((Cooperativa)spinnerCoop.getSelectedItem()).getNombreCooperativa();
+    }
+
+    @Override
+    public String getNombreProd(int id) {
+        return ((Producto)spinnerCoop.getSelectedItem()).getNombreProducto();
     }
 }

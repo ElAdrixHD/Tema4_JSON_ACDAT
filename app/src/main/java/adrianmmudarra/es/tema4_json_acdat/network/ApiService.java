@@ -5,6 +5,7 @@ import java.util.List;
 
 import adrianmmudarra.es.tema4_json_acdat.model.api.Cooperativa;
 import adrianmmudarra.es.tema4_json_acdat.model.api.Producto;
+import adrianmmudarra.es.tema4_json_acdat.model.api.Subasta;
 import adrianmmudarra.es.tema4_json_acdat.model.bizi.Bizi;
 import adrianmmudarra.es.tema4_json_acdat.model.bizi.Result;
 import adrianmmudarra.es.tema4_json_acdat.model.conversor.Conversor;
@@ -44,4 +45,7 @@ public interface ApiService {
 
     @GET("api/producto")
     Call<List<Producto>>getProductos();
+
+    @GET("api/subasta")
+    Call<List<Subasta>>getSubasta();
 }
