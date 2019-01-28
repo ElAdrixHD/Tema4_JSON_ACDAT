@@ -69,6 +69,7 @@ public class MiApiActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<Cooperativa>> call, Response<List<Cooperativa>> response) {
                 adapterCooperativa.clear();
+                adapterCooperativa.add(new Cooperativa(0,"Todas las cooperativas"));
                 adapterCooperativa.addAll(response.body());
                 adapterCooperativa.notifyDataSetChanged();
             }
@@ -84,6 +85,7 @@ public class MiApiActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<Producto>> call, Response<List<Producto>> response) {
                 adapterProducto.clear();
+                adapterProducto.add(new Producto(0,"Todos los productos"));
                 adapterProducto.addAll(response.body());
                 adapterProducto.notifyDataSetChanged();
             }

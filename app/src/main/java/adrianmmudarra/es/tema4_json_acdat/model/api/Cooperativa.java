@@ -14,6 +14,11 @@ public class Cooperativa {
     @Expose
     private String nombreCooperativa;
 
+    public Cooperativa(Integer idCooperativa, String nombreCooperativa) {
+        this.idCooperativa = idCooperativa;
+        this.nombreCooperativa = nombreCooperativa;
+    }
+
     public Integer getIdCooperativa() {
         return idCooperativa;
     }

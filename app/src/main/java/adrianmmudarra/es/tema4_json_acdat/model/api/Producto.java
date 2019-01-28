@@ -6,6 +6,10 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class Producto {
+    public Producto(Integer idProducto, String nombreProducto) {
+        this.idProducto = idProducto;
+        this.nombreProducto = nombreProducto;
+    }
 
     @SerializedName("id_producto")
     @Expose
