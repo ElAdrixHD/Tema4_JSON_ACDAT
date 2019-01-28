@@ -29,36 +29,11 @@ public class MenuActivity extends AppCompatActivity {
         ej6 = findViewById(R.id.btn_menu_ej6);
         ejvol = findViewById(R.id.btn_menu_ejvolun);
 
-        ej1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MenuActivity.this, MeteoActivity.class));
-            }
-        });
-        ej2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MenuActivity.this, ConversorActivity.class));
-            }
-        });
-        ej3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MenuActivity.this, BiziActivity.class));
-            }
-        });
-        ej4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MenuActivity.this, RssActivity.class));
-            }
-        });
-
-        ejvol.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MenuActivity.this, MalagaActivity.class));
-            }
-        });
+        ej1.setOnClickListener(v -> startActivity(new Intent(MenuActivity.this, MeteoActivity.class)));
+        ej2.setOnClickListener(v -> startActivity(new Intent(MenuActivity.this, ConversorActivity.class)));
+        ej3.setOnClickListener(v -> startActivity(new Intent(MenuActivity.this, BiziActivity.class)));
+        ej4.setOnClickListener(v -> startActivity(new Intent(MenuActivity.this, RssActivity.class)));
+        ej6.setOnClickListener(view -> startActivity(new Intent(MenuActivity.this, MiApiActivity.class)));
+        ejvol.setOnClickListener(v -> startActivity(new Intent(MenuActivity.this, MalagaActivity.class)));
     }
 }

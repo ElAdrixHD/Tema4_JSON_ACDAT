@@ -13,7 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.MapaMalagaActivity"></activity>
+        <activity android:name=".ui.MiApiActivity"></activity>
+        <activity android:name=".ui.MapaMalagaActivity" />
         <activity android:name=".ui.MalagaActivity" />
         <activity android:name=".ui.RssActivity" />
 
