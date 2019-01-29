@@ -39,6 +39,7 @@ public class RecyclerMiApiAdapter extends RecyclerView.Adapter<RecyclerMiApiAdap
         apiViewHolder.tv_prod.setText(datos.getNombreProd(repo.get(i).getProducto()));
         apiViewHolder.tv_coop.setText(datos.getNombreCoop(repo.get(i).getCooperativa()));
         apiViewHolder.tv_precios.setText(repo.get(i).toString());
+        apiViewHolder.tv_fecha.setText(repo.get(i).getFechaSubasta());
     }
 
     @Override
@@ -64,12 +65,14 @@ public class RecyclerMiApiAdapter extends RecyclerView.Adapter<RecyclerMiApiAdap
         TextView tv_coop;
         TextView tv_prod;
         TextView tv_precios;
+        TextView tv_fecha;
 
         ApiViewHolder(@NonNull View itemView) {
             super(itemView);
             tv_coop = itemView.findViewById(R.id.tv_api_item_coop);
             tv_precios = itemView.findViewById(R.id.tv_api_item_precios);
             tv_prod = itemView.findViewById(R.id.tv_api_item_prod);
+            tv_fecha = itemView.findViewById(R.id.tv_api_item_fecha);
         }
     }
 }

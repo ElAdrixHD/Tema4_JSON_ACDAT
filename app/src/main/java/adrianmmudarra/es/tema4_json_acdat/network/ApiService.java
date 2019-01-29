@@ -47,5 +47,27 @@ public interface ApiService {
     Call<List<Producto>>getProductos();
 
     @GET("api/subasta")
-    Call<List<Subasta>>getSubasta();
+    Call<List<Subasta>>getTodaSubasta();
+
+    @GET("api/subasta/cooperativa/{id}")
+    Call<List<Subasta>>getSubastaCoop(@Path("id")String id);
+
+    @GET("api/subasta/fecha/{id}")
+    Call<List<Subasta>>getSubastaFecha(@Path("id")String id);
+
+    @GET("api/subasta/producto/{id}")
+    Call<List<Subasta>>getSubastaProd(@Path("id")String id);
+
+    @GET("api/subasta/fecha/{fecha}/cooperativa/{id}")
+    Call<List<Subasta>>getSubastaFechaCoop(@Path("fecha") String fecha, @Path("id")String id);
+
+    @GET("api/subasta/fecha/{fecha}/producto/{id}")
+    Call<List<Subasta>>getSubastaFechaProd(@Path("fecha") String fecha, @Path("id")String id);
+
+    @GET("api/subasta/fecha/{fecha}/cooperativa/{idC}/producto/{idP}")
+    Call<List<Subasta>>getSubastaFechaCoopProd(@Path("fecha") String fecha, @Path("idC")String idC, @Path("idP")String idP);
+
+    @GET("api/subasta/cooperativa/{idC}/producto/{idP}")
+    Call<List<Subasta>>getSubastaCoopProd(@Path("idC") String idC, @Path("idP")String idP);
+
 }

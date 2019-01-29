@@ -1,10 +1,12 @@
 package adrianmmudarra.es.tema4_json_acdat.ui;
 
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -45,6 +47,7 @@ public class MiApiActivity extends AppCompatActivity implements RepoApi {
     Button limpiar, buscar;
     RecyclerView recyclerView;
     RecyclerMiApiAdapter apiAdapter;
+    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,26 +83,201 @@ public class MiApiActivity extends AppCompatActivity implements RepoApi {
     }
 
     private void buscarDatos() {
-        Call<List<Subasta>> call = apiService.getSubasta();
-        call.enqueue(new Callback<List<Subasta>>() {
-            @Override
-            public void onResponse(Call<List<Subasta>> call, Response<List<Subasta>> response) {
-                apiAdapter.clear();
-                apiAdapter.addAll(response.body());
-                apiAdapter.notifyDataSetChanged();
-            }
+        if (spinnerCoop.getSelectedItemPosition() == 0 && spinnerProd.getSelectedItemPosition() == 0 && TextUtils.isEmpty(selectFecha.getText())){
+            progressDialog = new ProgressDialog(MiApiActivity.this);
+            progressDialog.setCancelable(false);
+            progressDialog.setIndeterminate(true);
+            progressDialog.setCanceledOnTouchOutside(false);
+            progressDialog.setMessage("Esta operacion puede tardar un rato. Por favor espere.");
+            progressDialog.setTitle("Warning");
+            progressDialog.show();
+            Call<List<Subasta>> call = apiService.getTodaSubasta();
+            call.enqueue(new Callback<List<Subasta>>() {
+                @Override
+                public void onResponse(Call<List<Subasta>> call, Response<List<Subasta>> response) {
+                    apiAdapter.clear();
+                    apiAdapter.addAll(response.body());
+                    apiAdapter.notifyDataSetChanged();
+                    progressDialog.dismiss();
+                }
 
-            @Override
-            public void onFailure(Call<List<Subasta>> call, Throwable t) {
-                mostrarMensaje(t.getMessage());
+                @Override
+                public void onFailure(Call<List<Subasta>> call, Throwable t) {
+                    mostrarMensaje(t.getMessage());
+                    progressDialog.dismiss();
+                }
+            });
+
+        }else {
+            if (spinnerCoop.getSelectedItemPosition() != 0 && spinnerProd.getSelectedItemPosition() != 0 && TextUtils.isEmpty(selectFecha.getText())){
+                Call<List<Subasta>> call = apiService.getSubastaCoopProd(Integer.toString(((Cooperativa)spinnerCoop.getSelectedItem()).getIdCooperativa()),Integer.toString(((Producto)spinnerProd.getSelectedItem()).getIdProducto()));
+                call.enqueue(new Callback<List<Subasta>>() {
+                    @Override
+                    public void onResponse(Call<List<Subasta>> call, Response<List<Subasta>> response) {
+                        if (response.isSuccessful()){
+                            apiAdapter.clear();
+                            apiAdapter.addAll(response.body());
+                            apiAdapter.notifyDataSetChanged();
+                        }else {
+                            apiAdapter.clear();
+                            apiAdapter.notifyDataSetChanged();
+                            mostrarMensaje(response.message());
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<Subasta>> call, Throwable t) {
+                        mostrarMensaje(t.getMessage());
+                    }
+                });
+            }else {
+                if (spinnerCoop.getSelectedItemPosition() == 0 && spinnerProd.getSelectedItemPosition() == 0 && !TextUtils.isEmpty(selectFecha.getText())) {
+                    Call<List<Subasta>> call = apiService.getSubastaFecha(selectFecha.getText().toString());
+                    call.enqueue(new Callback<List<Subasta>>() {
+                        @Override
+                        public void onResponse(Call<List<Subasta>> call, Response<List<Subasta>> response) {
+                            if (response.isSuccessful()) {
+                                apiAdapter.clear();
+                                apiAdapter.addAll(response.body());
+                                apiAdapter.notifyDataSetChanged();
+                            } else {
+                                apiAdapter.clear();
+                                apiAdapter.notifyDataSetChanged();
+                                mostrarMensaje(response.message());
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<List<Subasta>> call, Throwable t) {
+                            mostrarMensaje(t.getMessage());
+                        }
+                    });
+                }else {
+                    if (spinnerCoop.getSelectedItemPosition() == 0 && spinnerProd.getSelectedItemPosition() != 0 && !TextUtils.isEmpty(selectFecha.getText())) {
+                        Call<List<Subasta>> call = apiService.getSubastaFechaProd(selectFecha.getText().toString(),Integer.toString(((Producto)spinnerProd.getSelectedItem()).getIdProducto()));
+                        call.enqueue(new Callback<List<Subasta>>() {
+                            @Override
+                            public void onResponse(Call<List<Subasta>> call, Response<List<Subasta>> response) {
+                                if (response.isSuccessful()) {
+                                    apiAdapter.clear();
+                                    apiAdapter.addAll(response.body());
+                                    apiAdapter.notifyDataSetChanged();
+                                } else {
+                                    apiAdapter.clear();
+                                    apiAdapter.notifyDataSetChanged();
+                                    mostrarMensaje(response.message());
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<List<Subasta>> call, Throwable t) {
+                                mostrarMensaje(t.getMessage());
+                            }
+                        });
+                    }else{
+                        if (spinnerCoop.getSelectedItemPosition() != 0 && spinnerProd.getSelectedItemPosition() != 0 && !TextUtils.isEmpty(selectFecha.getText())) {
+                            Call<List<Subasta>> call = apiService.getSubastaFechaCoopProd(selectFecha.getText().toString(),Integer.toString(((Cooperativa)spinnerCoop.getSelectedItem()).getIdCooperativa()),Integer.toString(((Producto)spinnerProd.getSelectedItem()).getIdProducto()));
+                            call.enqueue(new Callback<List<Subasta>>() {
+                                @Override
+                                public void onResponse(Call<List<Subasta>> call, Response<List<Subasta>> response) {
+                                    if (response.isSuccessful()) {
+                                        apiAdapter.clear();
+                                        apiAdapter.addAll(response.body());
+                                        apiAdapter.notifyDataSetChanged();
+                                    } else {
+                                        apiAdapter.clear();
+                                        apiAdapter.notifyDataSetChanged();
+                                        mostrarMensaje(response.message());
+                                    }
+                                }
+
+                                @Override
+                                public void onFailure(Call<List<Subasta>> call, Throwable t) {
+                                    mostrarMensaje(t.getMessage());
+                                }
+                            });
+                        }else {
+                            if (spinnerCoop.getSelectedItemPosition() == 0 && spinnerProd.getSelectedItemPosition() != 0 && TextUtils.isEmpty(selectFecha.getText())) {
+                                Call<List<Subasta>> call = apiService.getSubastaProd(Integer.toString(((Producto)spinnerProd.getSelectedItem()).getIdProducto()));
+                                call.enqueue(new Callback<List<Subasta>>() {
+                                    @Override
+                                    public void onResponse(Call<List<Subasta>> call, Response<List<Subasta>> response) {
+                                        if (response.isSuccessful()) {
+                                            apiAdapter.clear();
+                                            apiAdapter.addAll(response.body());
+                                            apiAdapter.notifyDataSetChanged();
+                                        } else {
+                                            apiAdapter.clear();
+                                            apiAdapter.notifyDataSetChanged();
+                                            mostrarMensaje(response.message());
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onFailure(Call<List<Subasta>> call, Throwable t) {
+                                        mostrarMensaje(t.getMessage());
+                                    }
+                                });
+                            }else {
+                                if (spinnerCoop.getSelectedItemPosition() != 0 && spinnerProd.getSelectedItemPosition() == 0 && TextUtils.isEmpty(selectFecha.getText())) {
+                                    Call<List<Subasta>> call = apiService.getSubastaCoop(Integer.toString(((Cooperativa)spinnerCoop.getSelectedItem()).getIdCooperativa()));
+                                    call.enqueue(new Callback<List<Subasta>>() {
+                                        @Override
+                                        public void onResponse(Call<List<Subasta>> call, Response<List<Subasta>> response) {
+                                            if (response.isSuccessful()) {
+                                                apiAdapter.clear();
+                                                apiAdapter.addAll(response.body());
+                                                apiAdapter.notifyDataSetChanged();
+                                            } else {
+                                                apiAdapter.clear();
+                                                apiAdapter.notifyDataSetChanged();
+                                                mostrarMensaje(response.message());
+                                            }
+                                        }
+
+                                        @Override
+                                        public void onFailure(Call<List<Subasta>> call, Throwable t) {
+                                            mostrarMensaje(t.getMessage());
+                                        }
+                                    });
+                                }else {
+                                    if (spinnerCoop.getSelectedItemPosition() != 0 && spinnerProd.getSelectedItemPosition() == 0 && !TextUtils.isEmpty(selectFecha.getText())) {
+                                        Call<List<Subasta>> call = apiService.getSubastaFechaCoop(selectFecha.getText().toString(),Integer.toString(((Cooperativa)spinnerCoop.getSelectedItem()).getIdCooperativa()));
+                                        call.enqueue(new Callback<List<Subasta>>() {
+                                            @Override
+                                            public void onResponse(Call<List<Subasta>> call, Response<List<Subasta>> response) {
+                                                if (response.isSuccessful()) {
+                                                    apiAdapter.clear();
+                                                    apiAdapter.addAll(response.body());
+                                                    apiAdapter.notifyDataSetChanged();
+                                                } else {
+                                                    apiAdapter.clear();
+                                                    apiAdapter.notifyDataSetChanged();
+                                                    mostrarMensaje(response.message());
+                                                }
+                                            }
+
+                                            @Override
+                                            public void onFailure(Call<List<Subasta>> call, Throwable t) {
+                                                mostrarMensaje(t.getMessage());
+                                            }
+                                        });
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
-        });
+        }
     }
 
     private void limpiarDatos() {
         selectFecha.setText("");
         spinnerCoop.setSelection(0);
         spinnerProd.setSelection(0);
+        apiAdapter.clear();
+        apiAdapter.notifyDataSetChanged();
     }
 
     private void descargarSpinners() {
@@ -107,9 +285,11 @@ public class MiApiActivity extends AppCompatActivity implements RepoApi {
         callcoop.enqueue(new Callback<List<Cooperativa>>() {
             @Override
             public void onResponse(Call<List<Cooperativa>> call, Response<List<Cooperativa>> response) {
+                arrayListCooperativa.clear();
+                arrayListCooperativa.add(new Cooperativa(0,"Todas las cooperativas"));
+                arrayListCooperativa.addAll(response.body());
                 adapterCooperativa.clear();
-                adapterCooperativa.add(new Cooperativa(0,"Todas las cooperativas"));
-                adapterCooperativa.addAll(response.body());
+                adapterCooperativa.addAll(arrayListCooperativa);
                 adapterCooperativa.notifyDataSetChanged();
             }
 
@@ -123,9 +303,11 @@ public class MiApiActivity extends AppCompatActivity implements RepoApi {
         callprod.enqueue(new Callback<List<Producto>>() {
             @Override
             public void onResponse(Call<List<Producto>> call, Response<List<Producto>> response) {
+                arrayListProducto.clear();
+                arrayListProducto.add(new Producto(0,"Todos los productos"));
+                arrayListProducto.addAll(response.body());
                 adapterProducto.clear();
-                adapterProducto.add(new Producto(0,"Todos los productos"));
-                adapterProducto.addAll(response.body());
+                adapterProducto.addAll(arrayListProducto);
                 adapterProducto.notifyDataSetChanged();
             }
 
@@ -151,11 +333,11 @@ public class MiApiActivity extends AppCompatActivity implements RepoApi {
 
     @Override
     public String getNombreCoop(int id) {
-        return ((Cooperativa)spinnerCoop.getSelectedItem()).getNombreCooperativa();
+        return arrayListCooperativa.get(id).getNombreCooperativa();
     }
 
     @Override
     public String getNombreProd(int id) {
-        return ((Producto)spinnerProd.getSelectedItem()).getNombreProducto();
+        return arrayListProducto.get(id).getNombreProducto();
     }
 }
